@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script>
-      WebAssembly.instantiateStreaming(fetch('./nzsc_single_player_web.gc.opt.wasm'))
-        .then(wasm_module => {
-            alert(`2 + 1 = ${wasm_module.instance.exports.add_one(2)}`);
-        });
-    </script>
+    <link rel="stylesheet" href="./index.css" />
   </head>
-  <body></body>
+  <body>
+    <div id="terminal-container">
+      <div id="terminal-output"></div>
+      <input id="terminal-input" type="text" />
+    </div>
+
+    <script src="./bundle.js"></script>
+  </body>
 </html>

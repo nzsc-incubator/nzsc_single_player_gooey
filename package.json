@@ -1,0 +1,15 @@
+{
+  "name": "nzsc_single_player_web",
+  "version": "0.1.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "scripts": {
+    "build-debug": "sh scripts/build-debug.sh"
+  },
+  "author": "Kyle Lin",
+  "license": "MIT",
+  "devDependencies": {
+    "webpack": "^4.8.3",
+    "webpack-cli": "^2.1.3"
+  }
+}

@@ -11,4 +11,9 @@ license = "MIT"
 crate-type = ["cdylib"]
 
 [dependencies]
-nzsc_single_player = "0.1.0"
+wasm-bindgen = "0.2.4"
+nzsc_single_player = "0.2.0"
+
+[profile.release]
+
+debug = true
