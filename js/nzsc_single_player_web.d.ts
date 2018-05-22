@@ -7,6 +7,13 @@ static  new(arg0: number, arg1: number): SinglePlayerNZSCWebInterface;
 
  initial_prompt(): string;
 
- next(arg0: string): string;
+ next(arg0: string): PromptWebInterface;
+
+}
+export class PromptWebInterface {
+free(): void;
+ text(): string;
+
+ is_final(): boolean;
 
 }

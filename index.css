@@ -1,5 +1,5 @@
 body {
-  background-color: #333;
+  background-color: #F1F1F1;
 }
 #terminal-container {
   background-color: #FFF;
@@ -14,6 +14,8 @@ body {
   padding: 2vh 2vw 2vh 2vw;
 
   overflow: auto;
+
+  box-shadow: 0 0 3vh 0.1vh #000A;
 }
 
 #terminal-output {

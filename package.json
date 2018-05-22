@@ -4,7 +4,8 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
-    "build-debug": "sh scripts/build-debug.sh"
+    "build-debug": "sh scripts/build-debug.sh",
+    "build-release": "sh scripts/build-release.sh"
   },
   "author": "Kyle Lin",
   "license": "MIT",

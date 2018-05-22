@@ -15,5 +15,5 @@ wasm-bindgen = "0.2.4"
 nzsc_single_player = "0.2.0"
 
 [profile.release]
-
-debug = true
+lto = true
+opt-level = "z"

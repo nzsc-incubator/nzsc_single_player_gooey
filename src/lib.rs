@@ -5,6 +5,7 @@ use wasm_bindgen::prelude::*;
 extern crate nzsc_single_player;
 use nzsc_single_player::single_player_game::SinglePlayerNZSCGame;
 use nzsc_single_player::command_line_app::CommandLineApp;
+use nzsc_single_player::command_line_app;
 
 #[wasm_bindgen]
 pub extern fn add_one(n: u32) -> u32 {
@@ -14,6 +15,32 @@ pub extern fn add_one(n: u32) -> u32 {
 #[wasm_bindgen]
 pub struct SinglePlayerNZSCWebInterface {
     game: SinglePlayerNZSCGame,
+}
+
+#[wasm_bindgen]
+pub struct PromptWebInterface {
+    text: String,
+    is_final: bool,
+}
+
+impl PromptWebInterface {
+    pub fn from_nzsc_prompt(prompt: command_line_app::Prompt) -> PromptWebInterface {
+        PromptWebInterface {
+            text: prompt.text,
+            is_final: prompt.is_final,
+        }
+    }
+}
+
+#[wasm_bindgen]
+impl PromptWebInterface {
+    pub fn text(&self) -> String {
+        self.text.clone()
+    }
+
+    pub fn is_final(&self) -> bool {
+        self.is_final
+    }
 }
 
 #[wasm_bindgen]
@@ -31,8 +58,8 @@ impl SinglePlayerNZSCWebInterface {
         self.game.initial_prompt()
     }
 
-    pub fn next(&mut self, response: &str) -> String {
-        let prompt = self.game.next(response.to_string());
-        prompt.text
+    pub fn next(&mut self, response: &str) -> PromptWebInterface {
+        let nzsc_prompt = self.game.next(response.to_string());
+        PromptWebInterface::from_nzsc_prompt(nzsc_prompt)
     }
 }
