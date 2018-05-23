@@ -18,10 +18,13 @@ body {
   box-shadow: 0 0 3vh 0.1vh #000A;
 }
 
+#terminal-output, #terminal-input {
+  font-family: "Roboto Mono";
+  font-size: 2vh;
+}
+
 #terminal-output {
   white-space: pre;
-  font-family: "Menlo";
-  font-size: 2vh;
 }
 
 #terminal-input {
@@ -29,9 +32,6 @@ body {
   margin: 0;
 
   width: 100%;
-
-  font-family: "Menlo";
-  font-size: 2vh;
 
   border: none;
   outline: none;
