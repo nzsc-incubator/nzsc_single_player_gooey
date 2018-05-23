@@ -12,6 +12,10 @@ const write = (text) => {
   output.textContent += text;
 };
 
+container.addEventListener('mousedown', () => {
+  input.focus();
+});
+
 const newGame = () => {
   const game = SinglePlayerNZSCWebInterface.new(Math.random() * MAX32, Math.random() * MAX32);
   const initialPrompt = game.initial_prompt();
