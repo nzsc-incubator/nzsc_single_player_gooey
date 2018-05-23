@@ -10,14 +10,14 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "nzsc_single_player"
-version = "0.2.0"
+version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "nzsc_single_player_web"
 version = "0.1.0"
 dependencies = [
- "nzsc_single_player 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "nzsc_single_player 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "wasm-bindgen 0.2.10 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
@@ -148,7 +148,7 @@ dependencies = [
 [metadata]
 "checksum dtoa 0.4.2 (registry+https://github.com/rust-lang/crates.io-index)" = "09c3753c3db574d215cba4ea76018483895d7bff25a31b49ba45db21c48e50ab"
 "checksum itoa 0.4.1 (registry+https://github.com/rust-lang/crates.io-index)" = "c069bbec61e1ca5a596166e55dfe4773ff745c3d16b700013bcaff9a6df2c682"
-"checksum nzsc_single_player 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)" = "72c8bb77218f3cfb9210c28f06e7d0fc8c630a0bb395ece1932cf1ca38f0cf88"
+"checksum nzsc_single_player 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)" = "5176cc3188da29e1aa8de4b5a003c1d2b439635c50b47bcc64adbaf7968cc5b4"
 "checksum proc-macro2 0.3.8 (registry+https://github.com/rust-lang/crates.io-index)" = "1b06e2f335f48d24442b35a19df506a835fb3547bc3c06ef27340da9acf5cae7"
 "checksum proc-macro2 0.4.3 (registry+https://github.com/rust-lang/crates.io-index)" = "a45f2f0ae0b5757f6fe9e68745ba25f5246aea3598984ed81d013865873c1f84"
 "checksum quote 0.5.2 (registry+https://github.com/rust-lang/crates.io-index)" = "9949cfe66888ffe1d53e6ec9d9f3b70714083854be20fd5e271b232a017401e8"
