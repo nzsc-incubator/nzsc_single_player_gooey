@@ -67,8 +67,8 @@ export class SinglePlayerNZSCWebInterface {
                 this.ptr = 0;
                 wasm.__wbg_singleplayernzscwebinterface_free(ptr);
             }
-        static new(arg0, arg1) {
-    return SinglePlayerNZSCWebInterface.__construct(wasm.singleplayernzscwebinterface_new(arg0, arg1));
+        static new(arg0) {
+    return SinglePlayerNZSCWebInterface.__construct(wasm.singleplayernzscwebinterface_new(arg0));
 }
 initial_prompt() {
     const retptr = globalArgumentPtr();

@@ -45,12 +45,9 @@ impl PromptWebInterface {
 
 #[wasm_bindgen]
 impl SinglePlayerNZSCWebInterface {
-    pub fn new(seed_high: i32, seed_low: i32) -> SinglePlayerNZSCWebInterface {
-        let seed_high = seed_high as i64;
-        let seed_low = seed_low as i64;
-        let full_seed = (seed_high << 32) | seed_low;
+    pub fn new(seed: u32) -> SinglePlayerNZSCWebInterface {
         SinglePlayerNZSCWebInterface {
-            game: SinglePlayerNZSCGame::new(full_seed)
+            game: SinglePlayerNZSCGame::new(seed)
         }
     }
 

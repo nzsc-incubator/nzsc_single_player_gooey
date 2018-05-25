@@ -1,6 +1,6 @@
 import { add_one, SinglePlayerNZSCWebInterface } from './nzsc_single_player_web';
 
-const MAX32 = 2147483647;
+const MAX32 = 2 ** 32 - 1;
 
 const ENTER_KEY = 13;
 
@@ -17,7 +17,7 @@ container.addEventListener('mousedown', () => {
 });
 
 const newGame = () => {
-  const game = SinglePlayerNZSCWebInterface.new(Math.random() * MAX32, Math.random() * MAX32);
+  const game = SinglePlayerNZSCWebInterface.new(Math.random() * MAX32);
   const initialPrompt = game.initial_prompt();
   write(initialPrompt + '\n\n');
 
