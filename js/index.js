@@ -30,6 +30,7 @@ if (!isAutofocusDisabled) {
   container.addEventListener('mousedown', (e) => {
     e.preventDefault();
     input.focus();
+    container.scrollTop = container.scrollHeight;
   }, { passive: false });
 }
 
