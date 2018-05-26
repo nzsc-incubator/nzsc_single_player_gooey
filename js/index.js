@@ -1,6 +1,14 @@
 import { add_one, SinglePlayerNZSCWebInterface } from './nzsc_single_player_web';
+import queryString from 'query-string';
+
+const parsedQuery = queryString.parse(location.search);
 
 const MAX32 = 2 ** 32 - 1;
+
+const parsedSeed = parseInt(parsedQuery.seed);
+const overrideSeed = isNaN(parsedSeed) || parsedSeed > MAX32
+  ? null
+  : parsedSeed;
 
 const ENTER_KEY = 13;
 
@@ -12,12 +20,16 @@ const write = (text) => {
   output.textContent += text;
 };
 
-container.addEventListener('mousedown', () => {
+container.addEventListener('mousedown', (e) => {
+  e.preventDefault();
   input.focus();
-});
+}, { passive: false });
 
 const newGame = () => {
-  const game = SinglePlayerNZSCWebInterface.new(Math.random() * MAX32);
+  const seed = overrideSeed === null
+    ? Math.random() * MAX32
+    : overrideSeed;
+  const game = SinglePlayerNZSCWebInterface.new(seed);
   const initialPrompt = game.initial_prompt();
   write(initialPrompt + '\n\n');
 
