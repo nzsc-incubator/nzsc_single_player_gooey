@@ -1,16 +1,18 @@
 import { add_one, SinglePlayerNZSCWebInterface } from './nzsc_single_player_web';
 import queryString from 'query-string';
 
-const parsedQuery = queryString.parse(location.search);
-
 const MAX32 = 2 ** 32 - 1;
+const ENTER_KEY = 13;
+
+const parsedQuery = queryString.parse(location.search);
 
 const parsedSeed = parseInt(parsedQuery.seed);
 const overrideSeed = isNaN(parsedSeed) || parsedSeed > MAX32
   ? null
   : parsedSeed;
 
-const ENTER_KEY = 13;
+const isAutofocusDisabled = parsedQuery.disable_autofocus === null
+  || parsedQuery.disable_autofocus.trim() === 'true';
 
 const container = document.getElementById('terminal-container');
 const output = document.getElementById('terminal-output');
@@ -20,10 +22,12 @@ const write = (text) => {
   output.textContent += text;
 };
 
-container.addEventListener('mousedown', (e) => {
-  e.preventDefault();
-  input.focus();
-}, { passive: false });
+if (!isAutofocusDisabled) {
+  container.addEventListener('mousedown', (e) => {
+    e.preventDefault();
+    input.focus();
+  }, { passive: false });
+}
 
 const newGame = () => {
   const seed = overrideSeed === null

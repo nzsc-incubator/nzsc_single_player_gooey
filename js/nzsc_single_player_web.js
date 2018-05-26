@@ -52,6 +52,36 @@ function passStringToWasm(arg) {
     return [ptr, buf.length];
 }
 
+export class PromptWebInterface {
+
+                static __construct(ptr) {
+                    return new PromptWebInterface(ptr);
+                }
+
+                constructor(ptr) {
+                    this.ptr = ptr;
+                }
+
+            free() {
+                const ptr = this.ptr;
+                this.ptr = 0;
+                wasm.__wbg_promptwebinterface_free(ptr);
+            }
+        text() {
+    const retptr = globalArgumentPtr();
+    wasm.promptwebinterface_text(retptr, this.ptr);
+    const mem = getUint32Memory();
+    const ptr = mem[retptr / 4];
+    const len = mem[retptr / 4 + 1];
+    const realRet = getStringFromWasm(ptr, len);
+    wasm.__wbindgen_free(ptr, len * 1);
+    return realRet;
+}
+is_final() {
+    return (wasm.promptwebinterface_is_final(this.ptr)) !== 0;
+}
+}
+
 export class SinglePlayerNZSCWebInterface {
 
                 static __construct(ptr) {
@@ -87,36 +117,6 @@ next(arg0) {
     } finally {
         wasm.__wbindgen_free(ptr0, len0 * 1);
     }
-}
-}
-
-export class PromptWebInterface {
-
-                static __construct(ptr) {
-                    return new PromptWebInterface(ptr);
-                }
-
-                constructor(ptr) {
-                    this.ptr = ptr;
-                }
-
-            free() {
-                const ptr = this.ptr;
-                this.ptr = 0;
-                wasm.__wbg_promptwebinterface_free(ptr);
-            }
-        text() {
-    const retptr = globalArgumentPtr();
-    wasm.promptwebinterface_text(retptr, this.ptr);
-    const mem = getUint32Memory();
-    const ptr = mem[retptr / 4];
-    const len = mem[retptr / 4 + 1];
-    const realRet = getStringFromWasm(ptr, len);
-    wasm.__wbindgen_free(ptr, len * 1);
-    return realRet;
-}
-is_final() {
-    return (wasm.promptwebinterface_is_final(this.ptr)) !== 0;
 }
 }
 
