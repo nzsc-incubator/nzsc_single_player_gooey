@@ -11,8 +11,12 @@ const overrideSeed = isNaN(parsedSeed) || parsedSeed > MAX32
   ? null
   : parsedSeed;
 
-const isAutofocusDisabled = parsedQuery.disable_autofocus === null
-  || parsedQuery.disable_autofocus.trim() === 'true';
+const isAutofocusDisabled = parsedQuery.disable_autofocus === undefined
+  ? false
+  : (
+    parsedQuery.disable_autofocus === null
+    || parsedQuery.disable_autofocus.trim() === 'true'
+  );
 
 const container = document.getElementById('terminal-container');
 const output = document.getElementById('terminal-output');
