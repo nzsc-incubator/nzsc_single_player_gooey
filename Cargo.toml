@@ -7,6 +7,8 @@ repository = "https://github.com/nzsc-org/nzsc_single_player_web"
 
 license = "MIT"
 
+publish = false
+
 [lib]
 crate-type = ["cdylib"]
 
