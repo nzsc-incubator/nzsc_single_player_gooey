@@ -1,19 +1,13 @@
 /* tslint:disable */
-export function add_one(arg0: number): number;
-
-export class PromptWebInterface {
-free(): void;
- text(): string;
-
- is_final(): boolean;
-
-}
 export class SinglePlayerNZSCWebInterface {
 free(): void;
-static  new(arg0: number): SinglePlayerNZSCWebInterface;
+ next(arg0: string): string;
 
- initial_prompt(): string;
+}
+export class OutputWebInterface {
+free(): void;
+ question(): string;
 
- next(arg0: string): PromptWebInterface;
+ notifications(): string;
 
 }
