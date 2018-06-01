@@ -1,6 +1,8 @@
 /* tslint:disable */
 import * as wasm from './nzsc_single_player_web_bg';
 
+export const NotificationWebInterface = Object.freeze({ Ek:0, });
+
 const TextDecoder = typeof self === 'object' && self.TextDecoder
     ? self.TextDecoder
     : require('util').TextDecoder;

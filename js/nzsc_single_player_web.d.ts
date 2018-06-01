@@ -1,4 +1,5 @@
 /* tslint:disable */
+export enum NotificationWebInterface {Ek,}
 export class SinglePlayerNZSCWebInterface {
 free(): void;
 static  new(arg0: number): SinglePlayerNZSCWebInterface;

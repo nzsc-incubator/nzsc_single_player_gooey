@@ -5,7 +5,7 @@ use wasm_bindgen::prelude::*;
 extern crate nzsc_single_player;
 use nzsc_single_player::single_player_game::SinglePlayerNZSCGame;
 
-extern crate nzsc_single_player_text_interface;
+extern crate nzsc_single_player_json_interface;
 
 use std::str;
 use std::str::FromStr;
@@ -89,6 +89,11 @@ pub struct OutputWebInterface {
     question: String,
 }
 
+#[wasm_bindgen]
+pub enum NotificationWebInterface {
+    Ek,
+}
+
 impl OutputWebInterface {
     pub fn from_output(output: nzsc_single_player::io::Output) -> OutputWebInterface {
         let notifications = OutputWebInterface::notification_vec_to_string(output.notifications);
@@ -107,7 +112,7 @@ impl OutputWebInterface {
         let mut v = Vec::new();
 
         for notification in &notification_vec {
-            let notification_string = nzsc_single_player_text_interface::notification::to_string(notification);
+            let notification_string = nzsc_single_player_json_interface::notification::to_json_string(notification);
             v.push(notification_string);
         }
 
@@ -117,7 +122,7 @@ impl OutputWebInterface {
     // Returns an empty string if self.question is None
     fn opt_question_to_string(question: Option<nzsc_single_player::io::Question>) -> String {
         if let Some(question) = question {
-            nzsc_single_player_text_interface::question::to_string(&question)
+            nzsc_single_player_json_interface::question::to_json_string(&question)
         } else {
             String::new()
         }
