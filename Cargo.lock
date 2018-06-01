@@ -10,23 +10,23 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "nzsc_single_player"
-version = "0.5.0"
+version = "0.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "nzsc_single_player_text_interface"
-version = "0.2.1"
+version = "0.2.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
- "nzsc_single_player 0.5.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "nzsc_single_player 0.5.1 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
 name = "nzsc_single_player_web"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
- "nzsc_single_player 0.5.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "nzsc_single_player_text_interface 0.2.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "nzsc_single_player 0.5.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "nzsc_single_player_text_interface 0.2.2 (registry+https://github.com/rust-lang/crates.io-index)",
  "wasm-bindgen 0.2.10 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
@@ -157,8 +157,8 @@ dependencies = [
 [metadata]
 "checksum dtoa 0.4.2 (registry+https://github.com/rust-lang/crates.io-index)" = "09c3753c3db574d215cba4ea76018483895d7bff25a31b49ba45db21c48e50ab"
 "checksum itoa 0.4.1 (registry+https://github.com/rust-lang/crates.io-index)" = "c069bbec61e1ca5a596166e55dfe4773ff745c3d16b700013bcaff9a6df2c682"
-"checksum nzsc_single_player 0.5.0 (registry+https://github.com/rust-lang/crates.io-index)" = "2012a5d1aa3ef4c843170fd5e6742743000e7ca4b1cb767dd0a827dda820e26c"
-"checksum nzsc_single_player_text_interface 0.2.1 (registry+https://github.com/rust-lang/crates.io-index)" = "c0df9d5bd86503cb23bb3f0f44adf73af74a9cfef50eeb09e1c63472343e6cc1"
+"checksum nzsc_single_player 0.5.1 (registry+https://github.com/rust-lang/crates.io-index)" = "ea362c61c9023f474cd49f72bcf0fd23bb02c06848da577d787eb7e6b8c6fe8c"
+"checksum nzsc_single_player_text_interface 0.2.2 (registry+https://github.com/rust-lang/crates.io-index)" = "bd08bba71b087fe422e7bd1642b50271339b2881e7cf0f7daecabcaa78acfa75"
 "checksum proc-macro2 0.3.8 (registry+https://github.com/rust-lang/crates.io-index)" = "1b06e2f335f48d24442b35a19df506a835fb3547bc3c06ef27340da9acf5cae7"
 "checksum proc-macro2 0.4.3 (registry+https://github.com/rust-lang/crates.io-index)" = "a45f2f0ae0b5757f6fe9e68745ba25f5246aea3598984ed81d013865873c1f84"
 "checksum quote 0.5.2 (registry+https://github.com/rust-lang/crates.io-index)" = "9949cfe66888ffe1d53e6ec9d9f3b70714083854be20fd5e271b232a017401e8"
