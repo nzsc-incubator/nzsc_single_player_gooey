@@ -23,7 +23,7 @@ dependencies = [
 
 [[package]]
 name = "nzsc_single_player_web"
-version = "0.4.1"
+version = "0.1.0"
 dependencies = [
  "nzsc_single_player 0.5.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "nzsc_single_player_text_interface 0.2.2 (registry+https://github.com/rust-lang/crates.io-index)",
