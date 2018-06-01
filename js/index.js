@@ -52,7 +52,9 @@ const write = (text) => {
 
 const stringifyOutput = (output) => {
   const questionStr = output.question();
-  const notificationsStr = output.notifications().map(n => n + '\n');
+
+  const notificationsJsonStr = output.notifications();
+  const notificationsStr = JSON.parse(notificationsJsonStr).map(n => n + '\n').join('');
   const fullStr = notificationsStr + (notificationsStr.length ? '\n' : '') + questionStr;
 
   return fullStr;
@@ -81,11 +83,13 @@ const newGame = () => {
       if (e.keyCode === ENTER_KEY) {
         input.removeEventListener('keypress', listener);
 
-        write(input.value);
+        const value = input.value;
+        input.value = '';
 
-        if (input.value.charAt(0).toLowerCase() === 'y') {
-          write('\n\n');
-          input.value = '';
+        write(value);
+        write('\n\n');
+
+        if (value.charAt(0).toLowerCase() === 'y') {
           newGame();
         }
       }

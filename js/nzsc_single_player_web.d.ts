@@ -1,13 +1,17 @@
 /* tslint:disable */
 export class SinglePlayerNZSCWebInterface {
 free(): void;
- next(arg0: string): string;
+static  new(arg0: number): SinglePlayerNZSCWebInterface;
+
+ initial_output(): OutputWebInterface;
+
+ next(arg0: string): OutputWebInterface;
 
 }
 export class OutputWebInterface {
 free(): void;
- question(): string;
-
  notifications(): string;
+
+ question(): string;
 
 }

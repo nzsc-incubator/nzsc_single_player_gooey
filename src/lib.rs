@@ -7,6 +7,7 @@ use nzsc_single_player::single_player_game::SinglePlayerNZSCGame;
 
 extern crate nzsc_single_player_text_interface;
 
+use std::str;
 use std::str::FromStr;
 
 fn parse_input(input: String, phase: &nzsc_single_player::single_player_game::Phase) -> nzsc_single_player::io::Answer {
@@ -54,14 +55,25 @@ fn parse_input(input: String, phase: &nzsc_single_player::single_player_game::Ph
 }
 
 // You can't pass Vec<String> to JS with wasm_bindgen, so we have to use a hack like this.
-// Takes something like vec!["foo", "baz"] and outputs "['foo','baz']"
-fn to_json_array(strings: Vec<String>) -> String {
+// Takes something like vec!["foo", "baz"] and outputs '["foo","baz"]'
+// Note: this function only escapes doublequotes and newlines.
+fn to_json_array(string_vec: Vec<String>) -> String {
     let mut s = "[".to_string();
-    for string in &strings {
-        s.push_str(string);
-        s.push_str(",");
+    for string in &string_vec {
+        s.push_str("\"");
+        let sanitized_string = string
+            .replace("\"", "\\\"")
+            .replace("\n", "\\n");
+        s.push_str(&sanitized_string);
+        s.push_str("\",");
     }
-    s.pop(); // Remove last "," let _ = ?
+
+    if string_vec.len() > 0 {
+        // Remove trailing comma.
+        // We must only do this if vec.len() > 0 because if vec.len() == 0, we will remove the "[".
+        s.pop();
+    }
+
     s.push_str("]");
     s
 }
@@ -73,23 +85,28 @@ pub struct SinglePlayerNZSCWebInterface {
 
 #[wasm_bindgen]
 pub struct OutputWebInterface {
-    notifications: Vec<nzsc_single_player::io::Notification>,
-    question: Option<nzsc_single_player::io::Question>,
+    notifications: String,
+    question: String,
+}
+
+impl OutputWebInterface {
+    pub fn from_output(output: nzsc_single_player::io::Output) -> OutputWebInterface {
+        let notifications = OutputWebInterface::notification_vec_to_string(output.notifications);
+        let question = OutputWebInterface::opt_question_to_string(output.question);
+
+        OutputWebInterface {
+            notifications,
+            question,
+        }
+    }
 }
 
 #[wasm_bindgen]
 impl OutputWebInterface {
-    pub fn from_output(output: nzsc_single_player::io::Output) -> OutputWebInterface {
-        OutputWebInterface {
-            notifications: output.notifications,
-            question: output.question,
-        }
-    }
-
-    pub fn notifications(&self) -> String {
+    fn notification_vec_to_string(notification_vec: Vec<nzsc_single_player::io::Notification>) -> String {
         let mut v = Vec::new();
 
-        for notification in &self.notifications {
+        for notification in &notification_vec {
             let notification_string = nzsc_single_player_text_interface::notification::to_string(notification);
             v.push(notification_string);
         }
@@ -98,12 +115,20 @@ impl OutputWebInterface {
     }
 
     // Returns an empty string if self.question is None
-    pub fn question(&self) -> String {
-        if let Some(ref question) = &self.question {
-            nzsc_single_player_text_interface::question::to_string(question)
+    fn opt_question_to_string(question: Option<nzsc_single_player::io::Question>) -> String {
+        if let Some(question) = question {
+            nzsc_single_player_text_interface::question::to_string(&question)
         } else {
             String::new()
         }
+    }
+
+    pub fn notifications(&self) -> String {
+        self.notifications.clone()
+    }
+
+    pub fn question(&self) -> String {
+        self.question.clone()
     }
 }
 
