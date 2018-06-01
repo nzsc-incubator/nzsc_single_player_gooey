@@ -80,7 +80,7 @@ fn to_json_array(string_vec: Vec<String>) -> String {
 
 #[wasm_bindgen]
 pub struct SinglePlayerNZSCWebInterface {
-    raw_game: SinglePlayerNZSCGame,
+    game: SinglePlayerNZSCGame,
 }
 
 #[wasm_bindgen]
@@ -136,7 +136,7 @@ impl OutputWebInterface {
 impl SinglePlayerNZSCWebInterface {
     pub fn new(seed: u32) -> SinglePlayerNZSCWebInterface {
         SinglePlayerNZSCWebInterface {
-            raw_game: SinglePlayerNZSCGame::new(seed)
+            game: SinglePlayerNZSCGame::new(seed)
         }
     }
 
