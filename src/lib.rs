@@ -7,9 +7,9 @@ use nzsc_single_player::single_player_game::SinglePlayerNZSCGame;
 
 extern crate nzsc_single_player_text_interface;
 
+use std::str;
 use std::str::FromStr;
 
-// Converts a String to an Answer.
 fn parse_input(input: String, phase: &nzsc_single_player::single_player_game::Phase) -> nzsc_single_player::io::Answer {
     match phase {
         &nzsc_single_player::single_player_game::Phase::CharacterChoosing {
@@ -54,6 +54,30 @@ fn parse_input(input: String, phase: &nzsc_single_player::single_player_game::Ph
     }
 }
 
+// You can't pass Vec<String> to JS with wasm_bindgen, so we have to use a hack like this.
+// Takes something like vec!["foo", "baz"] and outputs '["foo","baz"]'
+// Note: this function only escapes doublequotes and newlines.
+fn to_json_array(string_vec: Vec<String>) -> String {
+    let mut s = "[".to_string();
+    for string in &string_vec {
+        s.push_str("\"");
+        let sanitized_string = string
+            .replace("\"", "\\\"")
+            .replace("\n", "\\n");
+        s.push_str(&sanitized_string);
+        s.push_str("\",");
+    }
+
+    if string_vec.len() > 0 {
+        // Remove trailing comma.
+        // We must only do this if vec.len() > 0 because if vec.len() == 0, we will remove the "[".
+        s.pop();
+    }
+
+    s.push_str("]");
+    s
+}
+
 #[wasm_bindgen]
 pub struct SinglePlayerNZSCWebInterface {
     raw_game: SinglePlayerNZSCGame,
@@ -61,27 +85,50 @@ pub struct SinglePlayerNZSCWebInterface {
 
 #[wasm_bindgen]
 pub struct OutputWebInterface {
-    raw_output: nzsc_single_player::io::Output,
+    notifications: String,
+    question: String,
+}
+
+impl OutputWebInterface {
+    pub fn from_output(output: nzsc_single_player::io::Output) -> OutputWebInterface {
+        let notifications = OutputWebInterface::notification_vec_to_string(output.notifications);
+        let question = OutputWebInterface::opt_question_to_string(output.question);
+
+        OutputWebInterface {
+            notifications,
+            question,
+        }
+    }
 }
 
 #[wasm_bindgen]
 impl OutputWebInterface {
-    /// Returns the question in string form, or an empty string if there is no question.
-    pub fn question(&self) -> String {
-        if let Some(ref question) = &self.raw_output.question {
-            nzsc_single_player_text_interface::question::to_string(question)
+    fn notification_vec_to_string(notification_vec: Vec<nzsc_single_player::io::Notification>) -> String {
+        let mut v = Vec::new();
+
+        for notification in &notification_vec {
+            let notification_string = nzsc_single_player_text_interface::notification::to_string(notification);
+            v.push(notification_string);
+        }
+
+        to_json_array(v)
+    }
+
+    // Returns an empty string if self.question is None
+    fn opt_question_to_string(question: Option<nzsc_single_player::io::Question>) -> String {
+        if let Some(question) = question {
+            nzsc_single_player_text_interface::question::to_string(&question)
         } else {
             String::new()
         }
     }
 
-    pub fn notifications(&self) -> Vec<String> {
-        let mut v = Vec::new();
-        for notification in &self.raw_output.notifications {
-            let notification_string = nzsc_single_player_text_interface::notification::to_string(notification);
-            v.push(notification_string);
-        }
-        v
+    pub fn notifications(&self) -> String {
+        self.notifications.clone()
+    }
+
+    pub fn question(&self) -> String {
+        self.question.clone()
     }
 }
 
@@ -94,17 +141,14 @@ impl SinglePlayerNZSCWebInterface {
     }
 
     pub fn initial_output(&self) -> OutputWebInterface {
-        OutputWebInterface {
-            raw_output: self.raw_game.initial_output(),
-        }
+        let output = self.game.initial_output();
+        OutputWebInterface::from_output(output)
     }
 
     pub fn next(&mut self, input: &str) -> OutputWebInterface {
-        let parsed_input = parse_input(input.to_string(), &self.raw_game.phase);
-        let output = self.raw_game.next(parsed_input).expect("Phase-answer mismatch!");
+        let parsed_input = parse_input(input.to_string(), &self.game.phase);
+        let output = self.game.next(parsed_input).expect("Phase-answer mismatch!");
 
-        OutputWebInterface {
-            raw_output: output,
-        }
+        OutputWebInterface::from_output(output)
     }
 }

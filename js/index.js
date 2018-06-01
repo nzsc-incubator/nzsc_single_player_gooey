@@ -1,8 +1,16 @@
 import { add_one, SinglePlayerNZSCWebInterface } from './nzsc_single_player_web';
 import queryString from 'query-string';
 
+////////////////
+// Set up constants.
+////////////////
+
 const MAX32 = 2 ** 32 - 1;
 const ENTER_KEY = 13;
+
+////////////////
+// Parse query-string.
+////////////////
 
 const parsedQuery = queryString.parse(location.search);
 
@@ -18,13 +26,13 @@ const isAutofocusDisabled = parsedQuery.disable_autofocus === undefined
     || parsedQuery.disable_autofocus.trim() === 'true'
   );
 
+////////////////
+// Set up DOM.
+////////////////
+
 const container = document.getElementById('terminal-container');
 const output = document.getElementById('terminal-output');
 const input = document.getElementById('terminal-input');
-
-const write = (text) => {
-  output.textContent += text;
-};
 
 if (!isAutofocusDisabled) {
   container.addEventListener('mousedown', (e) => {
@@ -34,13 +42,38 @@ if (!isAutofocusDisabled) {
   }, { passive: false });
 }
 
+////////////////
+// Helpers.
+////////////////
+
+const write = (text) => {
+  output.textContent += text;
+};
+
+const stringifyOutput = (output) => {
+  const questionStr = output.question();
+
+  const notificationsJsonStr = output.notifications();
+  const notificationsStr = JSON.parse(notificationsJsonStr).map(n => n + '\n').join('');
+  const fullStr = notificationsStr + (notificationsStr.length ? '\n' : '') + questionStr;
+
+  return fullStr;
+};
+
+////////////////
+// Main logic.
+////////////////
+
 const newGame = () => {
   const seed = overrideSeed === null
     ? Math.random() * MAX32
     : overrideSeed;
   const game = SinglePlayerNZSCWebInterface.new(seed);
-  const initialPrompt = game.initial_prompt();
-  write(initialPrompt + '\n\n');
+
+  const initialOutput = game.initial_output();
+
+  const fullStr = stringifyOutput(initialOutput);
+  write(fullStr + '\n\n');
 
   input.focus();
   container.scrollTop = container.scrollHeight;
@@ -50,11 +83,13 @@ const newGame = () => {
       if (e.keyCode === ENTER_KEY) {
         input.removeEventListener('keypress', listener);
 
-        write(input.value);
+        const value = input.value;
+        input.value = '';
 
-        if (input.value.charAt(0).toLowerCase() === 'y') {
-          write('\n\n');
-          input.value = '';
+        write(value);
+        write('\n\n');
+
+        if (value.charAt(0).toLowerCase() === 'y') {
           newGame();
         }
       }
@@ -68,11 +103,11 @@ const newGame = () => {
       if (e.keyCode === ENTER_KEY) {
         input.removeEventListener('keypress', listener);
 
-        let prompt = game.next(input.value);
-        let promptText = prompt.text();
-        let isPromptFinal = prompt.is_final();
+        const output = game.next(input.value);
+        const fullStr = stringifyOutput(output);
+        const isPromptFinal = output.question() === '';
 
-        write(input.value + '\n\n' + promptText + '\n');
+        write(input.value + '\n\n' + fullStr + '\n\n');
 
         input.value = '';
 
@@ -83,6 +118,7 @@ const newGame = () => {
           waitForSubmission();
         } else {
           write('\n\nPlay again? y/N\n\n');
+          input.focus();
           container.scrollTop = container.scrollHeight;
           waitForPlayAgainResponse();
         }
@@ -93,5 +129,9 @@ const newGame = () => {
 
   waitForSubmission();
 };
+
+////////////////
+// Start a game.
+////////////////
 
 newGame();
