@@ -2,14 +2,21 @@ import { add_one, SinglePlayerNZSCWebInterface } from './nzsc_single_player_web'
 import queryString from 'query-string';
 
 ////////////////
+////////////////
+////////////////
 // Set up constants.
+////////////////
+////////////////
 ////////////////
 
 const MAX32 = 2 ** 32 - 1;
-const ENTER_KEY = 13;
 
 ////////////////
+////////////////
+////////////////
 // Parse query-string.
+////////////////
+////////////////
 ////////////////
 
 const parsedQuery = queryString.parse(location.search);
@@ -27,111 +34,109 @@ const isAutofocusDisabled = parsedQuery.disable_autofocus === undefined
   );
 
 ////////////////
-// Set up DOM.
+////////////////
+////////////////
+// If the window gets resized, the canvas will get automatically cleared.
+// As a result, we must cache the last output, so we can re-render it when the window is resized.
+////////////////
+////////////////
 ////////////////
 
-const container = document.getElementById('terminal-container');
-const output = document.getElementById('terminal-output');
-const input = document.getElementById('terminal-input');
+let cachedOutput = null;
 
-if (!isAutofocusDisabled) {
-  container.addEventListener('mousedown', (e) => {
-    e.preventDefault();
-    input.focus();
-    container.scrollTop = container.scrollHeight;
-  }, { passive: false });
-}
-
+////////////////
+////////////////
 ////////////////
 // Helpers.
 ////////////////
+////////////////
+////////////////
 
-const write = (text) => {
-  output.textContent += text;
+const render = (output) => {
+  const question = JSON.parse(output.question());
+  const notifications = JSON.parse(output.notifications());
+
+  ctx.fillStyle = '#f00';
+  ctx.fillRect(0, 0, 1800, 1000);
 };
 
-const stringifyOutput = (output) => {
-  const questionStr = output.question();
+const generateSeed = () => (
+  overrideSeed === null
+    ? Math.random() * MAX32
+    : overrideSeed
+);
 
-  const notificationsJsonStr = output.notifications();
-  const notificationsStr = JSON.parse(notificationsJsonStr).map(n => n + '\n').join('');
-  const fullStr = notificationsStr + (notificationsStr.length ? '\n' : '') + questionStr;
+const sizeCanvas = (canvas, dimensions) => {
+  const wFactor = window.innerWidth / dimensions.width;
+  const hFactor = window.innerHeight / dimensions.height;
+  const scaleFactor = Math.min(wFactor, hFactor);
+  const cssWidth = dimensions.width * scaleFactor;
+  const cssHeight = dimensions.height * scaleFactor;
 
-  return fullStr;
+  canvas.width = dimensions.width;
+  canvas.height = dimensions.height;
+
+  canvas.style.width = cssWidth + 'px';
+  canvas.style.height = cssHeight + 'px';
+
+  canvas.style.position = 'fixed';
+  canvas.style.left = (window.innerWidth - cssWidth) / 2 + 'px';
+  canvas.style.top = (window.innerHeight - cssHeight) / 2 + 'px';
 };
 
+////////////////
+////////////////
+////////////////
+// Set up DOM.
+////////////////
+////////////////
+////////////////
+
+const canvas = document.getElementById('nzsc-canvas');
+const DIMENSIONS = {
+  width: 1800,
+  height: 1000,
+};
+
+sizeCanvas(canvas, DIMENSIONS);
+
+window.addEventListener('resize', () => {
+  sizeCanvas(canvas, DIMENSIONS);
+
+  if (cachedOutput) {
+    render(cachedOutput);
+  }
+});
+
+// Sorry WebGL, not today...
+const ctx = canvas.getContext('2d');
+
+////////////////
+////////////////
 ////////////////
 // Main logic.
 ////////////////
+////////////////
+////////////////
 
 const newGame = () => {
-  const seed = overrideSeed === null
-    ? Math.random() * MAX32
-    : overrideSeed;
+  const seed = generateSeed();
   const game = SinglePlayerNZSCWebInterface.new(seed);
 
   const initialOutput = game.initial_output();
+  cachedOutput = initialOutput;
 
-  const fullStr = stringifyOutput(initialOutput);
-  write(fullStr + '\n\n');
+  render(initialOutput);
 
-  input.focus();
-  container.scrollTop = container.scrollHeight;
-
-  const waitForPlayAgainResponse = () => {
-    const listener = (e) => {
-      if (e.keyCode === ENTER_KEY) {
-        input.removeEventListener('keypress', listener);
-
-        const value = input.value;
-        input.value = '';
-
-        write(value);
-        write('\n\n');
-
-        if (value.charAt(0).toLowerCase() === 'y') {
-          newGame();
-        }
-      }
-    };
-
-    input.addEventListener('keypress', listener);
-  };
-
-  const waitForSubmission = () => {
-    const listener = (e) => {
-      if (e.keyCode === ENTER_KEY) {
-        input.removeEventListener('keypress', listener);
-
-        const output = game.next(input.value);
-        const fullStr = stringifyOutput(output);
-        const isPromptFinal = output.question() === '';
-
-        write(input.value + '\n\n' + fullStr + '\n\n');
-
-        input.value = '';
-
-        input.focus();
-        container.scrollTop = container.scrollHeight;
-
-        if (!isPromptFinal) {
-          waitForSubmission();
-        } else {
-          write('\n\nPlay again? y/N\n\n');
-          input.focus();
-          container.scrollTop = container.scrollHeight;
-          waitForPlayAgainResponse();
-        }
-      }
-    };
-    input.addEventListener('keypress', listener);
-  };
-
-  waitForSubmission();
+  // TODO: click/touchend handlers
 };
 
 ////////////////
+////////////////
+////////////////
 // Start a game.
+////////////////
+////////////////
 ////////////////
 
 newGame();
