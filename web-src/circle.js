@@ -1,4 +1,6 @@
-const circle = {
+import { getDimensions } from './canvas';
+
+const CIRCLE = {
   radius: 210,
   margin: 100,
 };
@@ -7,8 +9,8 @@ const circle = {
 const nthCircle = (n, canvasWidth, canvasHeight) => {
   const w = canvasWidth;
   const h = canvasHeight;
-  const r = circle.radius;
-  const m = circle.margin;
+  const r = CIRCLE.radius;
+  const m = CIRCLE.margin;
 
   // Top horizontal margin
   const thm = (w - 6*r - 2*m) / 2;
@@ -30,6 +32,27 @@ const nthCircle = (n, canvasWidth, canvasHeight) => {
   }
 
   return circleCoords[n].concat([r]);
-}
+};
 
-export default nthCircle;
+const getIndexOfCircleAt = (x, y) => {
+  const dimensions = getDimensions();
+  const circles = [0, 1, 2, 3, 4].map(i => nthCircle(i, dimensions.width, dimensions.height));
+
+  for (const i in circles) {
+    const [cx, cy, cr] = circles[i];
+
+    const dx = cx - x;
+    const dy = cy - y;
+
+    if (dx*dx + dy*dy <= cr*cr) {
+      return i;
+    }
+  }
+
+  return -1;
+};
+
+export {
+  nthCircle,
+  getIndexOfCircleAt,
+};

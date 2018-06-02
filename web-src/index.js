@@ -1,8 +1,8 @@
-import { add_one, SinglePlayerNZSCWebInterface } from './nzsc_single_player_web';
-import queryString from 'query-string';
-import createRenderer from './createRenderer';
-import getBoxIndexAt from './getBoxIndexAt';
-import getCircleIndexAt from './getCircleIndexAt';
+import { SinglePlayerNZSCWebInterface } from './nzsc_single_player_web';
+import query from './query';
+import { canvas, clientToLocalCoords } from './canvas';
+import { getRectIndexAt } from './rect';
+import renderer from './renderer';
 import images from './images';
 
 ////////////////
@@ -17,27 +17,7 @@ const MAX32 = 2 ** 32 - 1;
 
 const RIGHT_START = -225; // canvas.width / ACCELERATOR
 
-////////////////
-////////////////
-////////////////
-// Parse query-string.
-////////////////
-////////////////
-////////////////
 
-const parsedQuery = queryString.parse(location.search);
-
-const parsedSeed = parseInt(parsedQuery.seed);
-const overrideSeed = isNaN(parsedSeed) || parsedSeed > MAX32
-  ? null
-  : parsedSeed;
-
-const isAutofocusDisabled = parsedQuery.disable_autofocus === undefined
-  ? false
-  : (
-    parsedQuery.disable_autofocus === null
-    || parsedQuery.disable_autofocus.trim() === 'true'
-  );
 
 ////////////////
 ////////////////
@@ -47,8 +27,8 @@ const isAutofocusDisabled = parsedQuery.disable_autofocus === undefined
 ////////////////
 ////////////////
 
-let cachedOutput = null;
-let cachedLastOutput = null;
+let currentOutput = null;
+let previousOutput = null;
 
 ////////////////
 ////////////////
@@ -59,58 +39,13 @@ let cachedLastOutput = null;
 ////////////////
 
 const generateSeed = () => (
-  overrideSeed === null
+  query.overrideSeed === null
     ? Math.random() * MAX32
-    : overrideSeed
+    : query.overrideSeed
 );
 
-const sizeCanvas = (canvas, dimensions) => {
-  const wFactor = window.innerWidth / dimensions.width;
-  const hFactor = window.innerHeight / dimensions.height;
-  const scaleFactor = Math.min(wFactor, hFactor);
-  const cssWidth = dimensions.width * scaleFactor;
-  const cssHeight = dimensions.height * scaleFactor;
 
-  canvas.width = dimensions.width;
-  canvas.height = dimensions.height;
 
-  canvas.style.width = cssWidth + 'px';
-  canvas.style.height = cssHeight + 'px';
-
-  canvas.style.position = 'fixed';
-  canvas.style.left = (window.innerWidth - cssWidth) / 2 + 'px';
-  canvas.style.top = (window.innerHeight - cssHeight) / 2 + 'px';
-};
-
-////////////////
-////////////////
-////////////////
-// Set up DOM.
-////////////////
-////////////////
-////////////////
-
-const canvas = document.getElementById('nzsc-canvas');
-
-// Sorry WebGL, not today...
-const ctx = canvas.getContext('2d');
-
-const render = createRenderer(ctx);
-
-const DIMENSIONS = {
-  width: 1800,
-  height: 1000,
-};
-
-sizeCanvas(canvas, DIMENSIONS);
-
-window.addEventListener('resize', () => {
-  sizeCanvas(canvas, DIMENSIONS);
-
-  if (cachedOutput) {
-    render(cachedOutput);
-  }
-});
 
 ////////////////
 ////////////////
@@ -121,285 +56,136 @@ window.addEventListener('resize', () => {
 ////////////////
 
 const newGame = () => {
+  // Setup
+
   const seed = generateSeed();
   const game = SinglePlayerNZSCWebInterface.new(seed);
+  currentOutput = game.initial_output();
 
-  //let output = game.initial_output();
-  //cachedOutput = output;
-  cachedOutput = game.initial_output();
+  // Listeners
 
-  const characterSelectionListener = (e) => {
-    let x = e.clientX;
-    let y = e.clientY;
+  const characterScreenListener = (e) => {
+    const [x, y] = clientToLocalCoords(e.clientX, e.clientY);
 
-    const br = canvas.getBoundingClientRect();
+    const rectIndex = getRectIndexAt(x, y, canvas.height);
 
-    x -= br.left;
-    y -= br.top;
+    const { availableCharacters } = JSON.parse(currentOutput.question());
 
-    const wFactor = window.innerWidth / canvas.width;
-    const hFactor = window.innerHeight / canvas.height;
-    const scaleFactor = Math.min(wFactor, hFactor);
-
-    x /= scaleFactor;
-    y /= scaleFactor;
-
-    const boxIndex = getBoxIndexAt(x, y, canvas.height);
-
-    const { availableCharacters } = JSON.parse(cachedOutput.question());
-
-    if (!(boxIndex in availableCharacters)) {
+    if (!(rectIndex in availableCharacters)) {
       return;
     }
 
-    const character = availableCharacters[boxIndex];
+    const character = availableCharacters[rectIndex];
 
-    cachedLastOutput = cachedOutput;
-    cachedOutput = game.next(character);
+    previousOutput = currentOutput;
+    currentOutput = game.next(character);
 
-    canvas.removeEventListener('click', characterSelectionListener);
+    canvas.removeEventListener('click', characterScreenListener);
 
     // Check to see if computer chose same move as human.
-    if (JSON.parse(cachedOutput.question()).type === 'CHOOSE_CHARACTER') {
-      enterCharacterScreen();
+    if (JSON.parse(currentOutput.question()).type === 'CHOOSE_CHARACTER') {
+      transitionFromCharacterToCharacterScreen();
     } else {
-      beginCharacterToBoosterTransition();
+      transitionFromCharacterToBoosterScreen();
     }
   };
 
-  const boosterSelectionListener = (e) => {
-    let x = e.clientX;
-    let y = e.clientY;
+  // Transition-animators
 
-    const br = canvas.getBoundingClientRect();
-
-    x -= br.left;
-    y -= br.top;
-
-    const wFactor = window.innerWidth / canvas.width;
-    const hFactor = window.innerHeight / canvas.height;
-    const scaleFactor = Math.min(wFactor, hFactor);
-
-    x /= scaleFactor;
-    y /= scaleFactor;
-
-    const boxIndex = getBoxIndexAt(x, y, canvas.height);
-
-    const { availableBoosters } = JSON.parse(cachedOutput.question());
-
-    if (!(boxIndex in availableBoosters)) {
-      return;
-    }
-
-    const booster = availableBoosters[boxIndex];
-
-    cachedLastOutput = cachedOutput;
-    cachedOutput = game.next(booster);
-
-    canvas.removeEventListener('click', boosterSelectionListener);
-
-    beginBoosterToMoveTransition();
-  };
-
-  const moveSelectionListener = (e) => {
-    let x = e.clientX;
-    let y = e.clientY;
-
-    const br = canvas.getBoundingClientRect();
-
-    x -= br.left;
-    y -= br.top;
-
-    const wFactor = window.innerWidth / canvas.width;
-    const hFactor = window.innerHeight / canvas.height;
-    const scaleFactor = Math.min(wFactor, hFactor);
-
-    x /= scaleFactor;
-    y /= scaleFactor;
-
-    const circleIndex = getCircleIndexAt(x, y, canvas.width, canvas.height);
-
-    const { availableMoves } = JSON.parse(cachedOutput.question());
-
-    if (!(circleIndex in availableMoves)) {
-      return;
-    }
-
-    const move = availableMoves[circleIndex];
-
-    cachedLastOutput = cachedOutput;
-    cachedOutput = game.next(move);
-
-    canvas.removeEventListener('click', moveSelectionListener);
-
-    alert(move);
-
-    // TODO check for game over
-
-    //showOutcome();
-  };
-
-  const enterCharacterScreen = () => {
-    let t = RIGHT_START;
+  const transitionFromNothingToCharacterScreen = () => {
     let last = Date.now();
-
-    const tick = () => {
-      const now = Date.now();
-      const dt = now - last;
-      last = now;
-
-      t += dt;
-
-      if (t > 0) {
-        t = 0;
-      }
-
-      render(cachedOutput, t);
-
-      if (t < 0) {
-        requestAnimationFrame(tick);
-      } else {
-        canvas.addEventListener('click', characterSelectionListener);
-      }
-    };
-
-    requestAnimationFrame(tick);
-  };
-
-  const beginCharacterToBoosterTransition = () => {
     let t = 0;
-    let last = Date.now();
+    const finishTime = 1000;
 
-    const exitCharacterScreen = () => {
+    const render = () => {
       const now = Date.now();
-      const dt = now - last;
+      t += now - last;
       last = now;
 
-      t += dt;
+      if (t > finishTime) {
+        t = finishTime;
+      }
 
-      render(cachedLastOutput, t);
+      renderer.render({
+        type: 'NOTHING_TO_CHARACTER',
+        availableCharacters: JSON.parse(currentOutput.question()).availableCharacters,
+        completionFactor: t / finishTime,
+      });
 
-      if (t < 500) {
-        requestAnimationFrame(exitCharacterScreen);
+      if (t < finishTime) {
+        requestAnimationFrame(render);
       } else {
-        t = RIGHT_START;
-        requestAnimationFrame(enterBoosterScreen);
+        canvas.addEventListener('click', characterScreenListener);
       }
     };
 
-    const enterBoosterScreen = () => {
-      const now = Date.now();
-      const dt = now - last;
-      last = now;
-
-      t += dt;
-
-      if (t > 0) {
-        t = 0;
-      }
-
-      render(cachedOutput, t);
-
-      if (t < 0) {
-        requestAnimationFrame(enterBoosterScreen);
-      } else {
-        canvas.addEventListener('click', boosterSelectionListener);
-      }
-    };
-
-    requestAnimationFrame(exitCharacterScreen);
+    requestAnimationFrame(render);
   };
 
-  const beginBoosterToMoveTransition = () => {
-    let t = 0;
+  const transitionFromCharacterToCharacterScreen = () => {
     let last = Date.now();
+    let t = 0;
+    const finishTime = 1000;
 
-    const exitBoosterScreen = () => {
+    const render = () => {
       const now = Date.now();
-      const dt = now - last;
+      t += now - last;
       last = now;
 
-      t += dt;
+      if (t > finishTime) {
+        t = finishTime;
+      }
 
-      render(cachedLastOutput, t);
+      renderer.render({
+        type: 'CHARACTER_TO_CHARACTER',
+        previouslyAvailableCharacters: JSON.parse(previousOutput.question()).availableCharacters,
+        availableCharacters: JSON.parse(currentOutput.question()).availableCharacters,
+        completionFactor: t / finishTime,
+      });
 
-      if (t < 500) {
-        requestAnimationFrame(exitBoosterScreen);
+      if (t < finishTime) {
+        requestAnimationFrame(render);
       } else {
-        t = RIGHT_START;
-        requestAnimationFrame(enterMoveScreen);
+        canvas.addEventListener('click', characterScreenListener);
       }
     };
 
-    const enterMoveScreen = () => {
-      const now = Date.now();
-      const dt = now - last;
-      last = now;
-
-      t += dt;
-
-      if (t > 0) {
-        t = 0;
-      }
-
-      render(cachedOutput, t);
-
-      if (t < 0) {
-        requestAnimationFrame(enterMoveScreen);
-      } else {
-        canvas.addEventListener('click', moveSelectionListener);
-      }
-    };
-
-    requestAnimationFrame(exitBoosterScreen);
+    requestAnimationFrame(render);
   };
 
-  const showOutcome = () => {
-    let t = 0;
+  const transitionFromCharacterToBoosterScreen = () => {
     let last = Date.now();
+    let t = 0;
+    const finishTime = 1000;
 
-    const escalate = () => {
+    const render = () => {
       const now = Date.now();
-      const dt = now - last;
+      t += now - last;
       last = now;
 
-      t += dt;
+      if (t > finishTime) {
+        t = finishTime;
+      }
 
-      //render(cachedLastOutput, t);
+      renderer.render({
+        type: 'CHARACTER_TO_BOOSTER',
+        previouslyAvailableCharacters: JSON.parse(previousOutput.question()).availableCharacters,
+        availableBoosters: JSON.parse(currentOutput.question()).availableBoosters,
+        completionFactor: t / finishTime,
+      });
 
-      if (t < 500) {
-        requestAnimationFrame(escalate);
+      if (t < finishTime) {
+        requestAnimationFrame(render);
       } else {
-        //t = RIGHT_START?;
-        requestAnimationFrame(deescalate);
+        // todo boosterscreenlistener
       }
     };
 
-    const deescalate = () => {
-      const now = Date.now();
-      const dt = now - last;
-      last = now;
-
-      t += dt;
-
-      if (t > 0) {
-        t = 0;
-      }
-
-      //render(cachedOutput, t);
-
-      if (t < 0) {
-        requestAnimationFrame(deescalate);
-      } else {
-        canvas.addEventListener('click', moveSelectionListener);
-      }
-    };
-
-    requestAnimationFrame(escalate);
+    requestAnimationFrame(render);
   };
 
   images.waitForAllToLoad.then(() => {
-    enterCharacterScreen();
+    transitionFromNothingToCharacterScreen();
   });
 };
 
