@@ -1,10 +1,20 @@
 const path = require('path');
 
 module.exports = {
-  entry: './js/load-index-async.js',
+  entry: './web-src/load-index-async.js',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname)
   },
-  mode: "development" // Switch to "production" when ready
+  mode: "development", // Switch to "production" when ready
+  module: {
+    rules: [
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: [
+          'file-loader'
+        ]
+      }
+    ]
+  }
 };

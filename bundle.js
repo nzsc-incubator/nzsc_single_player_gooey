@@ -48,11 +48,11 @@
 /******/ 	var installedWasmModules = {};
 /******/
 /******/ 	var wasmImportObjects = {
-/******/ 		"./js/nzsc_single_player_web_bg.wasm": function() {
+/******/ 		"./web-src/nzsc_single_player_web_bg.wasm": function() {
 /******/ 			return {
 /******/ 				"./nzsc_single_player_web": {
 /******/ 					"__wbindgen_throw": function(p0i32,p1i32) {
-/******/ 						return __webpack_require__("./js/nzsc_single_player_web.js")["__wbindgen_throw"](p0i32,p1i32);
+/******/ 						return __webpack_require__("./web-src/nzsc_single_player_web.js")["__wbindgen_throw"](p0i32,p1i32);
 /******/ 					}
 /******/ 				}
 /******/ 			};
@@ -142,7 +142,7 @@
 /******/
 /******/ 		// Fetch + compile chunk loading for webassembly
 /******/
-/******/ 		var wasmModules = {"0":["./js/nzsc_single_player_web_bg.wasm"]}[chunkId] || [];
+/******/ 		var wasmModules = {"0":["./web-src/nzsc_single_player_web_bg.wasm"]}[chunkId] || [];
 /******/
 /******/ 		wasmModules.forEach(function(wasmModuleId) {
 /******/ 			var installedWasmModuleData = installedWasmModules[wasmModuleId];
@@ -152,7 +152,7 @@
 /******/ 				promises.push(installedWasmModuleData);
 /******/ 			else {
 /******/ 				var importObject = wasmImportObjects[wasmModuleId]();
-/******/ 				var req = fetch(__webpack_require__.p + "" + {"./js/nzsc_single_player_web_bg.wasm":"5ef74b162efc413c224d"}[wasmModuleId] + ".module.wasm");
+/******/ 				var req = fetch(__webpack_require__.p + "" + {"./web-src/nzsc_single_player_web_bg.wasm":"a532d0077fa92fc368ff"}[wasmModuleId] + ".module.wasm");
 /******/ 				var promise;
 /******/ 				if(importObject instanceof Promise && typeof WebAssembly.compileStreaming === 'function') {
 /******/ 					promise = Promise.all([WebAssembly.compileStreaming(req), importObject]).then(function(items) {
@@ -226,19 +226,19 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./js/load-index-async.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./web-src/load-index-async.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./js/load-index-async.js":
-/*!********************************!*\
-  !*** ./js/load-index-async.js ***!
-  \********************************/
+/***/ "./web-src/load-index-async.js":
+/*!*************************************!*\
+  !*** ./web-src/load-index-async.js ***!
+  \*************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(0)]).then(__webpack_require__.bind(null, /*! ./index */ \"./js/index.js\"));\n\n\n//# sourceURL=webpack:///./js/load-index-async.js?");
+eval("Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(0)]).then(__webpack_require__.bind(null, /*! ./index */ \"./web-src/index.js\"));\n\n\n//# sourceURL=webpack:///./web-src/load-index-async.js?");
 
 /***/ })
 

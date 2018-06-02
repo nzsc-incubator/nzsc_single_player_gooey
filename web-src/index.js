@@ -1,5 +1,6 @@
 import { add_one, SinglePlayerNZSCWebInterface } from './nzsc_single_player_web';
 import queryString from 'query-string';
+import createRenderer from './createRenderer';
 
 ////////////////
 ////////////////
@@ -52,14 +53,6 @@ let cachedOutput = null;
 ////////////////
 ////////////////
 
-const render = (output) => {
-  const question = JSON.parse(output.question());
-  const notifications = JSON.parse(output.notifications());
-
-  ctx.fillStyle = '#f00';
-  ctx.fillRect(0, 0, 1800, 1000);
-};
-
 const generateSeed = () => (
   overrideSeed === null
     ? Math.random() * MAX32
@@ -93,6 +86,12 @@ const sizeCanvas = (canvas, dimensions) => {
 ////////////////
 
 const canvas = document.getElementById('nzsc-canvas');
+
+// Sorry WebGL, not today...
+const ctx = canvas.getContext('2d');
+
+const render = createRenderer(ctx);
+
 const DIMENSIONS = {
   width: 1800,
   height: 1000,
@@ -107,9 +106,6 @@ window.addEventListener('resize', () => {
     render(cachedOutput);
   }
 });
-
-// Sorry WebGL, not today...
-const ctx = canvas.getContext('2d');
 
 ////////////////
 ////////////////
