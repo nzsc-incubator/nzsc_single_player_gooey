@@ -60,12 +60,8 @@ fn parse_input(input: String, phase: &nzsc_single_player::single_player_game::Ph
 fn to_json_array(string_vec: Vec<String>) -> String {
     let mut s = "[".to_string();
     for string in &string_vec {
-        s.push_str("\"");
-        let sanitized_string = string
-            .replace("\"", "\\\"")
-            .replace("\n", "\\n");
-        s.push_str(&sanitized_string);
-        s.push_str("\",");
+        s.push_str(string);
+        s.push_str(",");
     }
 
     if string_vec.len() > 0 {
@@ -87,11 +83,6 @@ pub struct SinglePlayerNZSCWebInterface {
 pub struct OutputWebInterface {
     notifications: String,
     question: String,
-}
-
-#[wasm_bindgen]
-pub enum NotificationWebInterface {
-    Ek,
 }
 
 impl OutputWebInterface {

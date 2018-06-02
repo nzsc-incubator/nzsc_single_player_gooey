@@ -1,6 +1,8 @@
 import { add_one, SinglePlayerNZSCWebInterface } from './nzsc_single_player_web';
 import queryString from 'query-string';
 import createRenderer from './createRenderer';
+import getBoxIndexAt from './getBoxIndexAt';
+import images from './images';
 
 ////////////////
 ////////////////
@@ -11,6 +13,8 @@ import createRenderer from './createRenderer';
 ////////////////
 
 const MAX32 = 2 ** 32 - 1;
+
+const RIGHT_START = -225; // canvas.width / ACCELERATOR
 
 ////////////////
 ////////////////
@@ -37,13 +41,13 @@ const isAutofocusDisabled = parsedQuery.disable_autofocus === undefined
 ////////////////
 ////////////////
 ////////////////
-// If the window gets resized, the canvas will get automatically cleared.
-// As a result, we must cache the last output, so we can re-render it when the window is resized.
+// Cache
 ////////////////
 ////////////////
 ////////////////
 
 let cachedOutput = null;
+let cachedLastOutput = null;
 
 ////////////////
 ////////////////
@@ -119,12 +123,199 @@ const newGame = () => {
   const seed = generateSeed();
   const game = SinglePlayerNZSCWebInterface.new(seed);
 
-  const initialOutput = game.initial_output();
-  cachedOutput = initialOutput;
+  //let output = game.initial_output();
+  //cachedOutput = output;
+  cachedOutput = game.initial_output();
 
-  render(initialOutput);
+  const characterSelectionListener = (e) => {
+    let x = e.clientX;
+    let y = e.clientY;
 
-  // TODO: click/touchend handlers
+    const br = canvas.getBoundingClientRect();
+
+    x -= br.left;
+    y -= br.top;
+
+    const wFactor = window.innerWidth / canvas.width;
+    const hFactor = window.innerHeight / canvas.height;
+    const scaleFactor = Math.min(wFactor, hFactor);
+
+    x /= scaleFactor;
+    y /= scaleFactor;
+
+    const boxIndex = getBoxIndexAt(x, y, canvas.height);
+
+    if (boxIndex === -1) {
+      return;
+    }
+
+    const character = 'Ninja Zombie Samurai Clown'.split(' ')[boxIndex];
+
+    cachedLastOutput = cachedOutput;
+    cachedOutput = game.next(character);
+
+    canvas.removeEventListener('click', characterSelectionListener);
+
+    // Check to see if computer chose same move as human.
+    if (JSON.parse(cachedOutput.question()).type === 'CHOOSE_CHARACTER') {
+      enterCharacterScreen();
+    } else {
+      beginCharacterToBoosterTransition();
+    }
+  };
+
+  const boosterSelectionListener = (e) => {
+    let x = e.clientX;
+    let y = e.clientY;
+
+    const br = canvas.getBoundingClientRect();
+
+    x -= br.left;
+    y -= br.top;
+
+    const wFactor = window.innerWidth / canvas.width;
+    const hFactor = window.innerHeight / canvas.height;
+    const scaleFactor = Math.min(wFactor, hFactor);
+
+    x /= scaleFactor;
+    y /= scaleFactor;
+
+    const boxIndex = getBoxIndexAt(x, y, canvas.height);
+
+    const availableBoosters = JSON.parse(cachedOutput.question()).availableBoosters;
+
+    if (!(boxIndex in availableBoosters)) {
+      return;
+    }
+
+    const booster = availableBoosters[boxIndex];
+
+    cachedLastOutput = cachedOutput;
+    cachedOutput = game.next(booster);
+
+    canvas.removeEventListener('click', boosterSelectionListener);
+
+    beginBoosterToMoveTransition();
+  };
+
+  const enterCharacterScreen = () => {
+    let t = RIGHT_START;
+    let last = Date.now();
+
+    const tick = () => {
+      const now = Date.now();
+      const dt = now - last;
+      last = now;
+
+      t += dt;
+
+      if (t > 0) {
+        t = 0;
+      }
+
+      render(cachedOutput, t);
+
+      if (t < 0) {
+        requestAnimationFrame(tick);
+      } else {
+        canvas.addEventListener('click', characterSelectionListener);
+      }
+    };
+
+    requestAnimationFrame(tick);
+  };
+
+  const beginCharacterToBoosterTransition = () => {
+    let t = 0;
+    let last = Date.now();
+
+    const exitCharacterScreen = () => {
+      const now = Date.now();
+      const dt = now - last;
+      last = now;
+
+      t += dt;
+
+      render(cachedLastOutput, t);
+
+      if (t < 500) {
+        requestAnimationFrame(exitCharacterScreen);
+      } else {
+        t = RIGHT_START;
+        requestAnimationFrame(enterBoosterScreen);
+      }
+    };
+
+    const enterBoosterScreen = () => {
+      const now = Date.now();
+      const dt = now - last;
+      last = now;
+
+      t += dt;
+
+      if (t > 0) {
+        t = 0;
+      }
+
+      render(cachedOutput, t);
+
+      if (t < 0) {
+        requestAnimationFrame(enterBoosterScreen);
+      } else {
+        canvas.addEventListener('click', boosterSelectionListener);
+      }
+    };
+
+    requestAnimationFrame(exitCharacterScreen);
+  };
+
+  const beginBoosterToMoveTransition = () => {
+    let t = 0;
+    let last = Date.now();
+
+    const exitBoosterScreen = () => {
+      const now = Date.now();
+      const dt = now - last;
+      last = now;
+
+      t += dt;
+
+      render(cachedLastOutput, t);
+
+      if (t < 500) {
+        requestAnimationFrame(exitBoosterScreen);
+      } else {
+        t = RIGHT_START;
+        requestAnimationFrame(enterMoveScreen);
+      }
+    };
+
+    const enterMoveScreen = () => {
+      const now = Date.now();
+      const dt = now - last;
+      last = now;
+
+      t += dt;
+
+      if (t > 0) {
+        t = 0;
+      }
+
+      render(cachedOutput, t);
+
+      if (t < 0) {
+        requestAnimationFrame(enterMoveScreen);
+      } else {
+        //canvas.addEventListener('click', moveSelectionListener);
+      }
+    };
+
+    requestAnimationFrame(exitBoosterScreen);
+  };
+
+  images.waitForAllToLoad.then(() => {
+    enterCharacterScreen();
+  });
 };
 
 ////////////////
@@ -134,5 +325,4 @@ const newGame = () => {
 ////////////////
 ////////////////
 ////////////////
-
 newGame();
