@@ -2,6 +2,7 @@ import { ctx } from './canvas';
 import { nthRect } from './rect';
 import { nthCircle } from './circle';
 import lerp from './lerp';
+import { getPhase, getPhaseTime } from './phases';
 import { logoOfCharacter, logoOfBooster, noSpace } from './logos';
 import images from './images';
 
@@ -110,7 +111,7 @@ const render = (snap) => {
       // 3. Exit - Human move circle exits left, computer move circle exits right. Overlay is removed.
 
       // This is the amount of time apportioned to each phase:
-      const BREAKDOWN = [0.15, 0.15, 0.55, 0.15];
+      const PHASE_LENGTHS = [0.15, 0.15, 0.55, 0.15];
 
       ctx.fillStyle = BACKGROUND;
       ctx.fillRect(0, 0, 1800, 1000);
@@ -120,72 +121,202 @@ const render = (snap) => {
 
       const selectedHumanMoveIndex = previouslyAvailableMoves.findIndex(move => move === noSpace(snap.humanMove));
 
-      ctx.fillStyle = TEMP_BG;
+      if (snap.completionFactor !== 1) {
+        ctx.fillStyle = TEMP_BG;
 
-      for (let i = 0; i < previouslyAvailableMoves.length; i++) {
-        // Don't draw selected human move.
-        if (i === selectedHumanMoveIndex) {
-          continue;
+        for (let i = 0; i < previouslyAvailableMoves.length; i++) {
+          // Don't draw selected human move.
+          if (i === selectedHumanMoveIndex) {
+            continue;
+          }
+
+          const circle = nthCircle(i);
+          const x = circle[0];
+          const [, y, r] = circle;
+          const d = 2 * r;
+
+          ctx.beginPath();
+          ctx.arc(x, y, r, 0, 2 * Math.PI);
+          ctx.fill();
+          ctx.closePath();
+
+          ctx.drawImage(images[previouslyAvailableMoves[i]], x - r, y - r, d, d);
         }
 
-        const circle = nthCircle(i);
-        const x = circle[0];
-        const [, y, r] = circle;
-        const d = 2 * r;
+        ctx.fillStyle = OVERLAY;
+        ctx.fillRect(0, 0, 1800, 1000);
+      } else {
+        ctx.fillStyle = TEMP_BG;
 
-        ctx.beginPath();
-        ctx.arc(x, y, r, 0, 2 * Math.PI);
-        ctx.fill();
-        ctx.closePath();
+        for (let i = 0; i < availableMoves.length; i++) {
+          const circle = nthCircle(i);
+          const x = circle[0];
+          const [, y, r] = circle;
+          const d = 2 * r;
 
-        ctx.drawImage(images[previouslyAvailableMoves[i]], x - r, y - r, d, d);
+          ctx.beginPath();
+          ctx.arc(x, y, r, 0, 2 * Math.PI);
+          ctx.fill();
+          ctx.closePath();
+
+          ctx.drawImage(images[availableMoves[i]], x - r, y - r, d, d);
+        }
       }
-
-      ctx.fillStyle = OVERLAY;
-      ctx.fillRect(0, 0, 1800, 1000);
 
       ctx.fillStyle = TEMP_BG;
 
-      const selectedHumanMoveStartCircle = nthCircle(selectedHumanMoveIndex);
-      const selectedHumanMoveEndCircle = [490, 500, 360];
-      const selectedHumanMoveCurrentCircle = snap.completionFactor < BREAKDOWN[0]
-        ? selectedHumanMoveStartCircle.map((n, i) => lerp(n, selectedHumanMoveEndCircle[i], snap.completionFactor / BREAKDOWN[0]))
-        : selectedHumanMoveEndCircle;
+      const phase = getPhase(snap.completionFactor, PHASE_LENGTHS);
+      const phaseLength = PHASE_LENGTHS[phase];
+      const phaseTime = getPhaseTime(snap.completionFactor, PHASE_LENGTHS);
 
-      {
-        const x = selectedHumanMoveCurrentCircle[0];
-        const [, y, r] = selectedHumanMoveCurrentCircle;
-        const d = 2 * r;
+      switch (phase) {
+        case 0: {
+          // Draw human move
+          const selectedHumanMoveStartCircle = nthCircle(selectedHumanMoveIndex);
+          const selectedHumanMoveEndCircle = [490, 500, 360];
+          const selectedHumanMoveCurrentCircle = selectedHumanMoveStartCircle.map((n, i) => lerp(n, selectedHumanMoveEndCircle[i], phaseTime / phaseLength));
 
-        ctx.beginPath();
-        ctx.arc(x, y, r, 0, 2 * Math.PI);
-        ctx.fill();
-        ctx.closePath();
+          const x = selectedHumanMoveCurrentCircle[0];
+          const [, y, r] = selectedHumanMoveCurrentCircle;
+          const d = 2 * r;
 
-        ctx.drawImage(images[noSpace(snap.humanMove)], x - r, y - r, d, d);
+          ctx.beginPath();
+          ctx.arc(x, y, r, 0, 2 * Math.PI);
+          ctx.fill();
+          ctx.closePath();
+
+          ctx.drawImage(images[noSpace(snap.humanMove)], x - r, y - r, d, d);
+
+          break;
+        }
+
+        case 1: {
+          // Draw human move
+          {
+            const selectedHumanMoveEndCircle = [490, 500, 360];
+
+            const x = selectedHumanMoveEndCircle[0];
+            const [, y, r] = selectedHumanMoveEndCircle;
+            const d = 2 * r;
+
+            ctx.beginPath();
+            ctx.arc(x, y, r, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.closePath();
+
+            ctx.drawImage(images[noSpace(snap.humanMove)], x - r, y - r, d, d);
+          }
+
+          // Draw computer move
+          const selectedComputerMoveStartCircle = [1800, 500, 360];
+          const selectedComputerMoveEndCircle = [1310, 500, 360];
+
+          const selectedComputerMoveCurrentCircle = selectedComputerMoveStartCircle.map((n, i) => lerp(n, selectedComputerMoveEndCircle[i], phaseTime / phaseLength));
+          const x = selectedComputerMoveCurrentCircle[0];
+          const [, y, r] = selectedComputerMoveCurrentCircle;
+          const d = 2 * r;
+
+          ctx.beginPath();
+          ctx.arc(x, y, r, 0, 2 * Math.PI);
+          ctx.fill();
+          ctx.closePath();
+
+          ctx.drawImage(images[noSpace(snap.computerMove)], x - r, y - r, d, d);
+
+          break;
+        }
+
+        case 2: {
+          // Draw human move
+          console.log(snap.whoGetsThePoint, snap.humanMove, snap.computerMove);
+          const FADE_RATE = 5;
+
+          {
+            if (snap.whoGetsThePoint === 'COMPUTER' || snap.whoGetsThePoint === 'BOTH') {
+              ctx.globalAlpha = lerp(1, 0, Math.min(phaseTime * FADE_RATE, 1));
+            }
+
+            const selectedHumanMoveEndCircle = [490, 500, 360];
+
+            const x = selectedHumanMoveEndCircle[0];
+            const [, y, r] = selectedHumanMoveEndCircle;
+            const d = 2 * r;
+
+            ctx.beginPath();
+            ctx.arc(x, y, r, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.closePath();
+
+            ctx.drawImage(images[noSpace(snap.humanMove)], x - r, y - r, d, d);
+
+            ctx.globalAlpha = 1;
+          }
+
+          // Draw computer move
+          {
+            if (snap.whoGetsThePoint === 'HUMAN' || snap.whoGetsThePoint === 'BOTH') {
+              ctx.globalAlpha = lerp(1, 0, Math.min(phaseTime * FADE_RATE, 1));
+            }
+
+            const selectedComputerMoveEndCircle = [1310, 500, 360];
+
+            const x = selectedComputerMoveEndCircle[0];
+            const [, y, r] = selectedComputerMoveEndCircle;
+            const d = 2 * r;
+
+            ctx.beginPath();
+            ctx.arc(x, y, r, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.closePath();
+
+            ctx.drawImage(images[noSpace(snap.computerMove)], x - r, y - r, d, d);
+
+            ctx.globalAlpha = 1;
+          }
+
+          break;
+        }
+
+        case 3: {
+          if (!(snap.whoGetsThePoint === 'COMPUTER' || snap.whoGetsThePoint === 'BOTH')) {
+            const selectedHumanMoveEndCircle = [490, 500, 360];
+
+            const x = selectedHumanMoveEndCircle[0] - 850 * (phaseTime / phaseLength);
+            const [, y, r] = selectedHumanMoveEndCircle;
+            const d = 2 * r;
+
+            ctx.beginPath();
+            ctx.arc(x, y, r, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.closePath();
+
+            ctx.drawImage(images[noSpace(snap.humanMove)], x - r, y - r, d, d);
+          }
+
+          // Draw computer move
+          if (!(snap.whoGetsThePoint === 'HUMAN' || snap.whoGetsThePoint === 'BOTH')) {
+            const selectedComputerMoveEndCircle = [1310, 500, 360];
+
+            const x = selectedComputerMoveEndCircle[0] + 850 * (phaseTime / phaseLength);
+            const [, y, r] = selectedComputerMoveEndCircle;
+            const d = 2 * r;
+
+            ctx.beginPath();
+            ctx.arc(x, y, r, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.closePath();
+
+            ctx.drawImage(images[noSpace(snap.computerMove)], x - r, y - r, d, d);
+          }
+
+          break;
+        }
       }
 
-      const selectedComputerMoveStartCircle = [1800, 500, 360];
-      const selectedComputerMoveEndCircle = [1310, 500, 360];
-
-      if (BREAKDOWN[0] < snap.completionFactor) {
-        const selectedComputerMoveCurrentCircle = snap.completionFactor < BREAKDOWN[0] + BREAKDOWN[1]
-          ? selectedComputerMoveStartCircle.map((n, i) => lerp(n, selectedComputerMoveEndCircle[i], (snap.completionFactor - BREAKDOWN[0]) / BREAKDOWN[1]))
-          : selectedComputerMoveEndCircle;
-        const x = selectedComputerMoveCurrentCircle[0];
-        const [, y, r] = selectedComputerMoveCurrentCircle;
-        const d = 2 * r;
-
-        ctx.beginPath();
-        ctx.arc(x, y, r, 0, 2 * Math.PI);
-        ctx.fill();
-        ctx.closePath();
-
-        ctx.drawImage(images[noSpace(snap.computerMove)], x - r, y - r, d, d);
-      }
+      break;
     }
 
-    default: console.log('TODO')
+    default: console.log('TODO: ' + snap.type)
   }
 };
 

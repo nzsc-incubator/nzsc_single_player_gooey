@@ -264,7 +264,7 @@ const newGame = () => {
   const transitionToMoveClash = () => {
     let last = Date.now();
     let t = 0;
-    const finishTime = 1000;
+    const finishTime = 3000;
 
     const render = () => {
       const now = Date.now();
@@ -278,7 +278,7 @@ const newGame = () => {
       const moveSelectionAndOutcome = JSON.parse(currentOutput.notifications()).find((notification) => {
         return notification.type === 'MOVE_SELECTION_AND_OUTCOME'
       });
-      
+
       const { humanMove, computerMove, whoGetsThePoint } = moveSelectionAndOutcome;
 
       renderer.render({
