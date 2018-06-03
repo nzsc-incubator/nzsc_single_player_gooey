@@ -311,7 +311,7 @@ const newGame = () => {
   const transitionToMoveClash = () => {
     let last = Date.now();
     let t = 0;
-    const finishTime = 2500;
+    const finishTime = 1500;
 
     const previouslyAvailableMoves = JSON.parse(previousOutput.question()).availableMoves;
     const availableMoves = JSON.parse(currentOutput.question()).availableMoves;
@@ -374,7 +374,7 @@ const newGame = () => {
   const transitionToFinalMoveClash = () => {
     let last = Date.now();
     let t = 0;
-    const finishTime = 3000;
+    const finishTime = 1500;
 
     const previouslyAvailableMoves = JSON.parse(previousOutput.question()).availableMoves;
 

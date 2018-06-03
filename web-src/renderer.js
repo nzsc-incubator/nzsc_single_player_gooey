@@ -366,7 +366,7 @@ const render = (snap) => {
       // 3. Exit - Human move circle exits left, computer move circle exits right. Overlay is removed.
 
       // This is the amount of time apportioned to each phase:
-      const PHASE_LENGTHS = [0.15, 0.15, 0.55, 0.15];
+      const PHASE_LENGTHS = [0.2, 0.2, 0.4, 0.2];
 
       ctx.fillStyle = BACKGROUND;
       ctx.fillRect(0, 0, 1800, 1000);
