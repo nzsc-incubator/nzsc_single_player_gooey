@@ -17,8 +17,6 @@ const MAX32 = 2 ** 32 - 1;
 
 const RIGHT_START = -225; // canvas.width / ACCELERATOR
 
-
-
 ////////////////
 ////////////////
 ////////////////
@@ -88,6 +86,27 @@ const newGame = () => {
     } else {
       transitionFromCharacterToBoosterScreen();
     }
+  };
+
+  const boosterScreenListener = (e) => {
+    const [x, y] = clientToLocalCoords(e.clientX, e.clientY);
+
+    const rectIndex = getRectIndexAt(x, y, canvas.height);
+
+    const { availableBoosters } = JSON.parse(currentOutput.question());
+
+    if (!(rectIndex in availableBoosters)) {
+      return;
+    }
+
+    const booster = availableBoosters[rectIndex];
+
+    previousOutput = currentOutput;
+    currentOutput = game.next(booster);
+
+    canvas.removeEventListener('click', boosterScreenListener);
+
+    transitionFromBoosterToMoveScreen();
   };
 
   // Transition-animators
@@ -177,7 +196,38 @@ const newGame = () => {
       if (t < finishTime) {
         requestAnimationFrame(render);
       } else {
-        // todo boosterscreenlistener
+        canvas.addEventListener('click', boosterScreenListener);
+      }
+    };
+
+    requestAnimationFrame(render);
+  };
+
+  const transitionFromBoosterToMoveScreen = () => {
+    let last = Date.now();
+    let t = 0;
+    const finishTime = 1000;
+
+    const render = () => {
+      const now = Date.now();
+      t += now - last;
+      last = now;
+
+      if (t > finishTime) {
+        t = finishTime;
+      }
+
+      renderer.render({
+        type: 'BOOSTER_TO_MOVE',
+        previouslyAvailableBoosters: JSON.parse(previousOutput.question()).availableBoosters,
+        availableMoves: JSON.parse(currentOutput.question()).availableMoves,
+        completionFactor: t / finishTime,
+      });
+
+      if (t < finishTime) {
+        requestAnimationFrame(render);
+      } else {
+        //canvas.addEventListener('click', moveScreenListener);
       }
     };
 

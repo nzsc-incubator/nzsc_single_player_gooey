@@ -6,9 +6,10 @@ const CIRCLE = {
 };
 
 // Returns an array representing a circle: [x, y, r]
-const nthCircle = (n, canvasWidth, canvasHeight) => {
-  const w = canvasWidth;
-  const h = canvasHeight;
+const nthCircle = (n) => {
+  const dimensions = getDimensions();
+  const w = dimensions.width;
+  const h = dimensions.height;
   const r = CIRCLE.radius;
   const m = CIRCLE.margin;
 
