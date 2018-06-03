@@ -25,15 +25,11 @@ const sizeCanvas = (canvas, dimensions) => {
   canvas.style.top = (window.innerHeight - cssHeight) / 2 + 'px';
 };
 
-sizeCanvas(canvas, DIMENSIONS);
-
-window.addEventListener('resize', () => {
+const correctCanvasDimensions = () => {
   sizeCanvas(canvas, DIMENSIONS);
+}
 
-  /*if (cachedOutput) {
-    render(cachedOutput);
-  }*/
-});
+correctCanvasDimensions();
 
 const getDimensions = () => {
   return {
@@ -54,7 +50,7 @@ const clientToLocalCoords = (x, y) => {
 
   x /= scaleFactor;
   y /= scaleFactor;
-  
+
   return [x, y];
 };
 
@@ -63,4 +59,5 @@ export {
   ctx,
   getDimensions,
   clientToLocalCoords,
+  correctCanvasDimensions,
 };

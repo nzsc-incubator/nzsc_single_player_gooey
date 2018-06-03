@@ -1,6 +1,6 @@
 import { SinglePlayerNZSCWebInterface } from './nzsc_single_player_web';
 import query from './query';
-import { canvas, clientToLocalCoords } from './canvas';
+import { canvas, clientToLocalCoords, correctCanvasDimensions } from './canvas';
 import { getRectIndexAt } from './rect';
 import { getCircleIndexAt } from './circle';
 import renderer from './renderer';
@@ -28,6 +28,7 @@ const RIGHT_START = -225; // canvas.width / ACCELERATOR
 
 let currentOutput = null;
 let previousOutput = null;
+let repaint = null;
 
 ////////////////
 ////////////////
@@ -143,6 +144,16 @@ const newGame = () => {
     let t = 0;
     const finishTime = 1000;
 
+    const availableCharacters = JSON.parse(currentOutput.question()).availableCharacters;
+
+    repaint = () => {
+      renderer.render({
+        type: 'NOTHING_TO_CHARACTER',
+        availableCharacters,
+        completionFactor: 1,
+      });
+    };
+
     const render = () => {
       const now = Date.now();
       t += now - last;
@@ -154,7 +165,7 @@ const newGame = () => {
 
       renderer.render({
         type: 'NOTHING_TO_CHARACTER',
-        availableCharacters: JSON.parse(currentOutput.question()).availableCharacters,
+        availableCharacters,
         completionFactor: t / finishTime,
       });
 
@@ -173,6 +184,18 @@ const newGame = () => {
     let t = 0;
     const finishTime = 1000;
 
+    const previouslyAvailableCharacters = JSON.parse(previousOutput.question()).availableCharacters;
+    const availableCharacters = JSON.parse(currentOutput.question()).availableCharacters;
+
+    repaint = () => {
+      renderer.render({
+        type: 'CHARACTER_TO_CHARACTER',
+        previouslyAvailableCharacters,
+        availableCharacters,
+        completionFactor: 1,
+      });
+    };
+
     const render = () => {
       const now = Date.now();
       t += now - last;
@@ -184,8 +207,8 @@ const newGame = () => {
 
       renderer.render({
         type: 'CHARACTER_TO_CHARACTER',
-        previouslyAvailableCharacters: JSON.parse(previousOutput.question()).availableCharacters,
-        availableCharacters: JSON.parse(currentOutput.question()).availableCharacters,
+        previouslyAvailableCharacters,
+        availableCharacters,
         completionFactor: t / finishTime,
       });
 
@@ -204,6 +227,18 @@ const newGame = () => {
     let t = 0;
     const finishTime = 1000;
 
+    const previouslyAvailableCharacters = JSON.parse(previousOutput.question()).availableCharacters;
+    const availableBoosters = JSON.parse(currentOutput.question()).availableBoosters;
+
+    repaint = () => {
+      renderer.render({
+        type: 'CHARACTER_TO_BOOSTER',
+        previouslyAvailableCharacters,
+        availableBoosters,
+        completionFactor: 1,
+      });
+    };
+
     const render = () => {
       const now = Date.now();
       t += now - last;
@@ -215,8 +250,8 @@ const newGame = () => {
 
       renderer.render({
         type: 'CHARACTER_TO_BOOSTER',
-        previouslyAvailableCharacters: JSON.parse(previousOutput.question()).availableCharacters,
-        availableBoosters: JSON.parse(currentOutput.question()).availableBoosters,
+        previouslyAvailableCharacters,
+        availableBoosters,
         completionFactor: t / finishTime,
       });
 
@@ -235,6 +270,18 @@ const newGame = () => {
     let t = 0;
     const finishTime = 1000;
 
+    const previouslyAvailableBoosters = JSON.parse(previousOutput.question()).availableBoosters;
+    const availableMoves = JSON.parse(currentOutput.question()).availableMoves;
+
+    repaint = () => {
+      renderer.render({
+        type: 'BOOSTER_TO_MOVE',
+        previouslyAvailableBoosters,
+        availableMoves,
+        completionFactor: 1,
+      });
+    };
+
     const render = () => {
       const now = Date.now();
       t += now - last;
@@ -246,8 +293,8 @@ const newGame = () => {
 
       renderer.render({
         type: 'BOOSTER_TO_MOVE',
-        previouslyAvailableBoosters: JSON.parse(previousOutput.question()).availableBoosters,
-        availableMoves: JSON.parse(currentOutput.question()).availableMoves,
+        previouslyAvailableBoosters,
+        availableMoves,
         completionFactor: t / finishTime,
       });
 
@@ -266,6 +313,33 @@ const newGame = () => {
     let t = 0;
     const finishTime = 3000;
 
+    const previouslyAvailableMoves = JSON.parse(previousOutput.question()).availableMoves;
+    const availableMoves = JSON.parse(currentOutput.question()).availableMoves;
+
+    const moveSelectionAndOutcome = JSON.parse(currentOutput.notifications()).find((notification) => {
+      return notification.type === 'MOVE_SELECTION_AND_OUTCOME';
+    });
+    const score = JSON.parse(currentOutput.notifications()).find((notification) => {
+      return notification.type === 'SCORE_UPDATE';
+    });
+
+    const { humanMove, computerMove, whoGetsThePoint } = moveSelectionAndOutcome;
+    const { humanPoints, computerPoints } = score;
+
+    repaint = () => {
+      renderer.render({
+        type: 'MOVE_CLASH',
+        previouslyAvailableMoves,
+        availableMoves,
+        humanMove,
+        computerMove,
+        whoGetsThePoint,
+        humanPoints,
+        computerPoints,
+        completionFactor: 1,
+      });
+    };
+
     const render = () => {
       const now = Date.now();
       t += now - last;
@@ -275,20 +349,10 @@ const newGame = () => {
         t = finishTime;
       }
 
-      const moveSelectionAndOutcome = JSON.parse(currentOutput.notifications()).find((notification) => {
-        return notification.type === 'MOVE_SELECTION_AND_OUTCOME';
-      });
-      const score = JSON.parse(currentOutput.notifications()).find((notification) => {
-        return notification.type === 'SCORE_UPDATE';
-      });
-
-      const { humanMove, computerMove, whoGetsThePoint } = moveSelectionAndOutcome;
-      const { humanPoints, computerPoints } = score;
-
       renderer.render({
         type: 'MOVE_CLASH',
-        previouslyAvailableMoves: JSON.parse(previousOutput.question()).availableMoves,
-        availableMoves: JSON.parse(currentOutput.question()).availableMoves,
+        previouslyAvailableMoves,
+        availableMoves,
         humanMove,
         computerMove,
         whoGetsThePoint,
@@ -312,6 +376,31 @@ const newGame = () => {
     let t = 0;
     const finishTime = 3000;
 
+    const previouslyAvailableMoves = JSON.parse(previousOutput.question()).availableMoves;
+
+    const moveSelectionAndOutcome = JSON.parse(currentOutput.notifications()).find((notification) => {
+      return notification.type === 'MOVE_SELECTION_AND_OUTCOME';
+    });
+    const score = JSON.parse(currentOutput.notifications()).find((notification) => {
+      return notification.type === 'SCORE_UPDATE';
+    });
+
+    const { humanMove, computerMove, whoGetsThePoint } = moveSelectionAndOutcome;
+    const { humanPoints, computerPoints } = score;
+
+    repaint = () => {
+      renderer.render({
+        type: 'FINAL_MOVE_CLASH',
+        previouslyAvailableMoves,
+        humanMove,
+        computerMove,
+        whoGetsThePoint,
+        humanPoints,
+        computerPoints,
+        completionFactor: 1,
+      });
+    };
+
     const render = () => {
       const now = Date.now();
       t += now - last;
@@ -321,19 +410,9 @@ const newGame = () => {
         t = finishTime;
       }
 
-      const moveSelectionAndOutcome = JSON.parse(currentOutput.notifications()).find((notification) => {
-        return notification.type === 'MOVE_SELECTION_AND_OUTCOME';
-      });
-      const score = JSON.parse(currentOutput.notifications()).find((notification) => {
-        return notification.type === 'SCORE_UPDATE';
-      });
-
-      const { humanMove, computerMove, whoGetsThePoint } = moveSelectionAndOutcome;
-      const { humanPoints, computerPoints } = score;
-
       renderer.render({
         type: 'FINAL_MOVE_CLASH',
-        previouslyAvailableMoves: JSON.parse(previousOutput.question()).availableMoves,
+        previouslyAvailableMoves,
         humanMove,
         computerMove,
         whoGetsThePoint,
@@ -364,4 +443,13 @@ const newGame = () => {
 ////////////////
 ////////////////
 ////////////////
+
+window.addEventListener('resize', () => {
+  correctCanvasDimensions();
+
+  if (repaint) {
+    repaint();
+  }
+});
+
 newGame();
