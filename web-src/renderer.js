@@ -36,6 +36,36 @@ const render = (snap) => {
       break;
     }
 
+    case 'CHARACTER_TO_CHARACTER': {
+      ctx.fillStyle = BACKGROUND;
+      ctx.fillRect(0, 0, 1800, 1000);
+
+      const previouslyAvailableCharacterLogoMoves = snap.previouslyAvailableCharacters.map(logoOfCharacter);
+      const availableCharacterLogoMoves = snap.availableCharacters.map(logoOfCharacter);
+
+      ctx.fillStyle = BOX_BACKGROUND;
+
+      for (let i = 0; i < previouslyAvailableCharacterLogoMoves.length; i++) {
+        const rect = nthRect(i);
+        const x = rect[0] + 1800 * (0 - snap.completionFactor);
+        const [, y, w, h] = rect;
+        ctx.fillRect(x, y, w, h);
+
+        ctx.drawImage(images[previouslyAvailableCharacterLogoMoves[i]], x, 300, 400, 400);
+      }
+
+      for (let i = 0; i < availableCharacterLogoMoves.length; i++) {
+        const rect = nthRect(i);
+        const x = rect[0] + 1800 * (1 - snap.completionFactor);
+        const [, y, w, h] = rect;
+        ctx.fillRect(x, y, w, h);
+
+        ctx.drawImage(images[availableCharacterLogoMoves[i]], x, 300, 400, 400);
+      }
+
+      break;
+    }
+
     case 'CHARACTER_TO_BOOSTER': {
       ctx.fillStyle = BACKGROUND;
       ctx.fillRect(0, 0, 1800, 1000);
