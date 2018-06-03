@@ -129,7 +129,7 @@ const newGame = () => {
     canvas.removeEventListener('click', moveScreenListener);
 
     // Check if game is over
-    if (JSON.parse(currentOutput.question()).type === 'NONE') {
+    if (JSON.parse(currentOutput.question()).type === 'DONE') {
       transitionToFinalMoveClash();
     } else {
       transitionToMoveClash();
@@ -276,10 +276,14 @@ const newGame = () => {
       }
 
       const moveSelectionAndOutcome = JSON.parse(currentOutput.notifications()).find((notification) => {
-        return notification.type === 'MOVE_SELECTION_AND_OUTCOME'
+        return notification.type === 'MOVE_SELECTION_AND_OUTCOME';
+      });
+      const score = JSON.parse(currentOutput.notifications()).find((notification) => {
+        return notification.type === 'SCORE_UPDATE';
       });
 
       const { humanMove, computerMove, whoGetsThePoint } = moveSelectionAndOutcome;
+      const { humanPoints, computerPoints } = score;
 
       renderer.render({
         type: 'MOVE_CLASH',
@@ -288,6 +292,8 @@ const newGame = () => {
         humanMove,
         computerMove,
         whoGetsThePoint,
+        humanPoints,
+        computerPoints,
         completionFactor: t / finishTime,
       });
 
@@ -302,7 +308,48 @@ const newGame = () => {
   };
 
   const transitionToFinalMoveClash = () => {
-    // TODO
+    let last = Date.now();
+    let t = 0;
+    const finishTime = 3000;
+
+    const render = () => {
+      const now = Date.now();
+      t += now - last;
+      last = now;
+
+      if (t > finishTime) {
+        t = finishTime;
+      }
+
+      const moveSelectionAndOutcome = JSON.parse(currentOutput.notifications()).find((notification) => {
+        return notification.type === 'MOVE_SELECTION_AND_OUTCOME';
+      });
+      const score = JSON.parse(currentOutput.notifications()).find((notification) => {
+        return notification.type === 'SCORE_UPDATE';
+      });
+
+      const { humanMove, computerMove, whoGetsThePoint } = moveSelectionAndOutcome;
+      const { humanPoints, computerPoints } = score;
+
+      renderer.render({
+        type: 'FINAL_MOVE_CLASH',
+        previouslyAvailableMoves: JSON.parse(previousOutput.question()).availableMoves,
+        humanMove,
+        computerMove,
+        whoGetsThePoint,
+        humanPoints,
+        computerPoints,
+        completionFactor: t / finishTime,
+      });
+
+      if (t < finishTime) {
+        requestAnimationFrame(render);
+      } else {
+        //canvas.addEventListener('click', finalScreenListener);
+      }
+    };
+
+    requestAnimationFrame(render);
   };
 
   images.waitForAllToLoad.then(() => {
