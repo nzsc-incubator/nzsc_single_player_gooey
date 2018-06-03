@@ -142,7 +142,7 @@ const newGame = () => {
   const transitionFromNothingToCharacterScreen = () => {
     let last = Date.now();
     let t = 0;
-    const finishTime = 1000;
+    const finishTime = 500;
 
     const availableCharacters = JSON.parse(currentOutput.question()).availableCharacters;
 
@@ -182,7 +182,7 @@ const newGame = () => {
   const transitionFromCharacterToCharacterScreen = () => {
     let last = Date.now();
     let t = 0;
-    const finishTime = 1000;
+    const finishTime = 500;
 
     const previouslyAvailableCharacters = JSON.parse(previousOutput.question()).availableCharacters;
     const availableCharacters = JSON.parse(currentOutput.question()).availableCharacters;
@@ -225,7 +225,7 @@ const newGame = () => {
   const transitionFromCharacterToBoosterScreen = () => {
     let last = Date.now();
     let t = 0;
-    const finishTime = 1000;
+    const finishTime = 500;
 
     const previouslyAvailableCharacters = JSON.parse(previousOutput.question()).availableCharacters;
     const availableBoosters = JSON.parse(currentOutput.question()).availableBoosters;
@@ -268,7 +268,7 @@ const newGame = () => {
   const transitionFromBoosterToMoveScreen = () => {
     let last = Date.now();
     let t = 0;
-    const finishTime = 1000;
+    const finishTime = 500;
 
     const previouslyAvailableBoosters = JSON.parse(previousOutput.question()).availableBoosters;
     const availableMoves = JSON.parse(currentOutput.question()).availableMoves;
@@ -311,7 +311,7 @@ const newGame = () => {
   const transitionToMoveClash = () => {
     let last = Date.now();
     let t = 0;
-    const finishTime = 3000;
+    const finishTime = 2500;
 
     const previouslyAvailableMoves = JSON.parse(previousOutput.question()).availableMoves;
     const availableMoves = JSON.parse(currentOutput.question()).availableMoves;
