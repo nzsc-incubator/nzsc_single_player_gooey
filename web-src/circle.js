@@ -35,7 +35,7 @@ const nthCircle = (n) => {
   return circleCoords[n].concat([r]);
 };
 
-const getIndexOfCircleAt = (x, y) => {
+const getCircleIndexAt = (x, y) => {
   const dimensions = getDimensions();
   const circles = [0, 1, 2, 3, 4].map(i => nthCircle(i, dimensions.width, dimensions.height));
 
@@ -55,5 +55,5 @@ const getIndexOfCircleAt = (x, y) => {
 
 export {
   nthCircle,
-  getIndexOfCircleAt,
+  getCircleIndexAt,
 };

@@ -2,6 +2,7 @@ import { SinglePlayerNZSCWebInterface } from './nzsc_single_player_web';
 import query from './query';
 import { canvas, clientToLocalCoords } from './canvas';
 import { getRectIndexAt } from './rect';
+import { getCircleIndexAt } from './circle';
 import renderer from './renderer';
 import images from './images';
 
@@ -65,7 +66,7 @@ const newGame = () => {
   const characterScreenListener = (e) => {
     const [x, y] = clientToLocalCoords(e.clientX, e.clientY);
 
-    const rectIndex = getRectIndexAt(x, y, canvas.height);
+    const rectIndex = getRectIndexAt(x, y);
 
     const { availableCharacters } = JSON.parse(currentOutput.question());
 
@@ -91,7 +92,7 @@ const newGame = () => {
   const boosterScreenListener = (e) => {
     const [x, y] = clientToLocalCoords(e.clientX, e.clientY);
 
-    const rectIndex = getRectIndexAt(x, y, canvas.height);
+    const rectIndex = getRectIndexAt(x, y);
 
     const { availableBoosters } = JSON.parse(currentOutput.question());
 
@@ -107,6 +108,32 @@ const newGame = () => {
     canvas.removeEventListener('click', boosterScreenListener);
 
     transitionFromBoosterToMoveScreen();
+  };
+
+  const moveScreenListener = (e) => {
+    const [x, y] = clientToLocalCoords(e.clientX, e.clientY);
+
+    const circleIndex = getCircleIndexAt(x, y);
+
+    const { availableMoves } = JSON.parse(currentOutput.question());
+
+    if (!(circleIndex in availableMoves)) {
+      return;
+    }
+
+    const move = availableMoves[circleIndex];
+
+    previousOutput = currentOutput;
+    currentOutput = game.next(move);
+
+    canvas.removeEventListener('click', moveScreenListener);
+
+    // Check if game is over
+    if (JSON.parse(currentOutput.question()).type === 'NONE') {
+      transitionToFinalMoveClash();
+    } else {
+      transitionToMoveClash();
+    }
   };
 
   // Transition-animators
@@ -227,11 +254,55 @@ const newGame = () => {
       if (t < finishTime) {
         requestAnimationFrame(render);
       } else {
-        //canvas.addEventListener('click', moveScreenListener);
+        canvas.addEventListener('click', moveScreenListener);
       }
     };
 
     requestAnimationFrame(render);
+  };
+
+  const transitionToMoveClash = () => {
+    let last = Date.now();
+    let t = 0;
+    const finishTime = 1000;
+
+    const render = () => {
+      const now = Date.now();
+      t += now - last;
+      last = now;
+
+      if (t > finishTime) {
+        t = finishTime;
+      }
+
+      const moveSelectionAndOutcome = JSON.parse(currentOutput.notifications()).find((notification) => {
+        return notification.type === 'MOVE_SELECTION_AND_OUTCOME'
+      });
+      
+      const { humanMove, computerMove, whoGetsThePoint } = moveSelectionAndOutcome;
+
+      renderer.render({
+        type: 'MOVE_CLASH',
+        previouslyAvailableMoves: JSON.parse(previousOutput.question()).availableMoves,
+        availableMoves: JSON.parse(currentOutput.question()).availableMoves,
+        humanMove,
+        computerMove,
+        whoGetsThePoint,
+        completionFactor: t / finishTime,
+      });
+
+      if (t < finishTime) {
+        requestAnimationFrame(render);
+      } else {
+        canvas.addEventListener('click', moveScreenListener);
+      }
+    };
+
+    requestAnimationFrame(render);
+  };
+
+  const transitionToFinalMoveClash = () => {
+    // TODO
   };
 
   images.waitForAllToLoad.then(() => {

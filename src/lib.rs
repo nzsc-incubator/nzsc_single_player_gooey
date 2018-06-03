@@ -110,12 +110,12 @@ impl OutputWebInterface {
         to_json_array(v)
     }
 
-    // Returns an empty string if self.question is None
+    // Returns an '{"type":"DONE"}' if self.question is None
     fn opt_question_to_string(question: Option<nzsc_single_player::io::Question>) -> String {
         if let Some(question) = question {
             nzsc_single_player_json_interface::question::to_json_string(&question)
         } else {
-            String::new()
+            r#"{"type":"DONE"}"#.to_string()
         }
     }
 
