@@ -32,7 +32,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _images_Kick_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./images/Kick.png */ \"./web-src/images/Kick.png\");\n/* harmony import */ var _images_Kick_png__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_images_Kick_png__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _images_NinjaSword_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./images/NinjaSword.png */ \"./web-src/images/NinjaSword.png\");\n/* harmony import */ var _images_NinjaSword_png__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_images_NinjaSword_png__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _images_Nunchucks_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./images/Nunchucks.png */ \"./web-src/images/Nunchucks.png\");\n/* harmony import */ var _images_Nunchucks_png__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_images_Nunchucks_png__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var _images_Rampage_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./images/Rampage.png */ \"./web-src/images/Rampage.png\");\n/* harmony import */ var _images_Rampage_png__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_images_Rampage_png__WEBPACK_IMPORTED_MODULE_3__);\n/* harmony import */ var _images_Muscle_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./images/Muscle.png */ \"./web-src/images/Muscle.png\");\n/* harmony import */ var _images_Muscle_png__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_images_Muscle_png__WEBPACK_IMPORTED_MODULE_4__);\n/* harmony import */ var _images_Zap_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./images/Zap.png */ \"./web-src/images/Zap.png\");\n/* harmony import */ var _images_Zap_png__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_images_Zap_png__WEBPACK_IMPORTED_MODULE_5__);\n/* harmony import */ var _images_SamuraiSword_png__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./images/SamuraiSword.png */ \"./web-src/images/SamuraiSword.png\");\n/* harmony import */ var _images_SamuraiSword_png__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_images_SamuraiSword_png__WEBPACK_IMPORTED_MODULE_6__);\n/* harmony import */ var _images_Helmet_png__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./images/Helmet.png */ \"./web-src/images/Helmet.png\");\n/* harmony import */ var _images_Helmet_png__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_images_Helmet_png__WEBPACK_IMPORTED_MODULE_7__);\n/* harmony import */ var _images_Smash_png__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./images/Smash.png */ \"./web-src/images/Smash.png\");\n/* harmony import */ var _images_Smash_png__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_images_Smash_png__WEBPACK_IMPORTED_MODULE_8__);\n/* harmony import */ var _images_JugglingKnives_png__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./images/JugglingKnives.png */ \"./web-src/images/JugglingKnives.png\");\n/* harmony import */ var _images_JugglingKnives_png__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_images_JugglingKnives_png__WEBPACK_IMPORTED_MODULE_9__);\n/* harmony import */ var _images_AcidSpray_png__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./images/AcidSpray.png */ \"./web-src/images/AcidSpray.png\");\n/* harmony import */ var _images_AcidSpray_png__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_images_AcidSpray_png__WEBPACK_IMPORTED_MODULE_10__);\n/* harmony import */ var _images_Nose_png__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./images/Nose.png */ \"./web-src/images/Nose.png\");\n/* harmony import */ var _images_Nose_png__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_images_Nose_png__WEBPACK_IMPORTED_MODULE_11__);\n/* harmony import */ var _images_Placeholder_png__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./images/Placeholder.png */ \"./web-src/images/Placeholder.png\");\n/* harmony import */ var _images_Placeholder_png__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_images_Placeholder_png__WEBPACK_IMPORTED_MODULE_12__);\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*\nTODO other images\n*/\n\nconst srcs = {Kick: (_images_Kick_png__WEBPACK_IMPORTED_MODULE_0___default()), NinjaSword: (_images_NinjaSword_png__WEBPACK_IMPORTED_MODULE_1___default()), Nunchucks: (_images_Nunchucks_png__WEBPACK_IMPORTED_MODULE_2___default()), Rampage: (_images_Rampage_png__WEBPACK_IMPORTED_MODULE_3___default()), Muscle: (_images_Muscle_png__WEBPACK_IMPORTED_MODULE_4___default()), Zap: (_images_Zap_png__WEBPACK_IMPORTED_MODULE_5___default()), SamuraiSword: (_images_SamuraiSword_png__WEBPACK_IMPORTED_MODULE_6___default()), Helmet: (_images_Helmet_png__WEBPACK_IMPORTED_MODULE_7___default()), Smash: (_images_Smash_png__WEBPACK_IMPORTED_MODULE_8___default()), JugglingKnives: (_images_JugglingKnives_png__WEBPACK_IMPORTED_MODULE_9___default()), AcidSpray: (_images_AcidSpray_png__WEBPACK_IMPORTED_MODULE_10___default()), Nose: (_images_Nose_png__WEBPACK_IMPORTED_MODULE_11___default()), Placeholder: (_images_Placeholder_png__WEBPACK_IMPORTED_MODULE_12___default())};\n\nconst imageLoadPromises = [];\n\nconst images = Object.keys(srcs).reduce((obj, srcKey) => {\n  const img = new Image();\n  img.src = srcs[srcKey];\n\n  imageLoadPromises.push(new Promise((resolve, reject) => {\n    img.addEventListener('load', () => {\n      resolve();\n    });\n  }));\n\n  return {\n    ...obj,\n    [srcKey]: img,\n  };\n}, {});\n\nimages.ShadowFireball = images.Placeholder;\nimages.ShadowSlip = images.Placeholder;\nimages.LightningFastKarateChop = images.Placeholder;\nimages.RunInCircles = images.Placeholder;\nimages.ZombieCorps = images.Placeholder;\nimages.Apocalypse = images.Placeholder;\nimages.Regenerate = images.Placeholder;\nimages.Gravedigger = images.Placeholder;\nimages.Lightning = images.Placeholder;\nimages.Earthquake = images.Placeholder;\nimages.Bend = images.Placeholder;\nimages.Twist = images.Placeholder;\nimages.BackwardsMoustachio = images.Placeholder;\nimages.NoseOfTheTaunted = images.Placeholder;\nimages.BigHairyDeal = images.Placeholder;\nimages.MustacheMash = images.Placeholder;\n\nimages.waitForAllToLoad = Promise.all(imageLoadPromises);\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (images);\n\n\n//# sourceURL=webpack:///./web-src/images.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _images_Kick_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./images/Kick.png */ \"./web-src/images/Kick.png\");\n/* harmony import */ var _images_Kick_png__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_images_Kick_png__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _images_NinjaSword_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./images/NinjaSword.png */ \"./web-src/images/NinjaSword.png\");\n/* harmony import */ var _images_NinjaSword_png__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_images_NinjaSword_png__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _images_Nunchucks_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./images/Nunchucks.png */ \"./web-src/images/Nunchucks.png\");\n/* harmony import */ var _images_Nunchucks_png__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_images_Nunchucks_png__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var _images_ShadowFireball_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./images/ShadowFireball.png */ \"./web-src/images/ShadowFireball.png\");\n/* harmony import */ var _images_ShadowFireball_png__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_images_ShadowFireball_png__WEBPACK_IMPORTED_MODULE_3__);\n/* harmony import */ var _images_ShadowSlip_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./images/ShadowSlip.png */ \"./web-src/images/ShadowSlip.png\");\n/* harmony import */ var _images_ShadowSlip_png__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_images_ShadowSlip_png__WEBPACK_IMPORTED_MODULE_4__);\n/* harmony import */ var _images_RunInCircles_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./images/RunInCircles.png */ \"./web-src/images/RunInCircles.png\");\n/* harmony import */ var _images_RunInCircles_png__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_images_RunInCircles_png__WEBPACK_IMPORTED_MODULE_5__);\n/* harmony import */ var _images_LightningFastKarateChop_png__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./images/LightningFastKarateChop.png */ \"./web-src/images/LightningFastKarateChop.png\");\n/* harmony import */ var _images_LightningFastKarateChop_png__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_images_LightningFastKarateChop_png__WEBPACK_IMPORTED_MODULE_6__);\n/* harmony import */ var _images_Rampage_png__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./images/Rampage.png */ \"./web-src/images/Rampage.png\");\n/* harmony import */ var _images_Rampage_png__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_images_Rampage_png__WEBPACK_IMPORTED_MODULE_7__);\n/* harmony import */ var _images_Muscle_png__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./images/Muscle.png */ \"./web-src/images/Muscle.png\");\n/* harmony import */ var _images_Muscle_png__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_images_Muscle_png__WEBPACK_IMPORTED_MODULE_8__);\n/* harmony import */ var _images_Zap_png__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./images/Zap.png */ \"./web-src/images/Zap.png\");\n/* harmony import */ var _images_Zap_png__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_images_Zap_png__WEBPACK_IMPORTED_MODULE_9__);\n/* harmony import */ var _images_Regenerate_png__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./images/Regenerate.png */ \"./web-src/images/Regenerate.png\");\n/* harmony import */ var _images_Regenerate_png__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_images_Regenerate_png__WEBPACK_IMPORTED_MODULE_10__);\n/* harmony import */ var _images_Gravedigger_png__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./images/Gravedigger.png */ \"./web-src/images/Gravedigger.png\");\n/* harmony import */ var _images_Gravedigger_png__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_images_Gravedigger_png__WEBPACK_IMPORTED_MODULE_11__);\n/* harmony import */ var _images_ZombieCorps_png__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./images/ZombieCorps.png */ \"./web-src/images/ZombieCorps.png\");\n/* harmony import */ var _images_ZombieCorps_png__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_images_ZombieCorps_png__WEBPACK_IMPORTED_MODULE_12__);\n/* harmony import */ var _images_Apocalypse_png__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./images/Apocalypse.png */ \"./web-src/images/Apocalypse.png\");\n/* harmony import */ var _images_Apocalypse_png__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_images_Apocalypse_png__WEBPACK_IMPORTED_MODULE_13__);\n/* harmony import */ var _images_SamuraiSword_png__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./images/SamuraiSword.png */ \"./web-src/images/SamuraiSword.png\");\n/* harmony import */ var _images_SamuraiSword_png__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_images_SamuraiSword_png__WEBPACK_IMPORTED_MODULE_14__);\n/* harmony import */ var _images_Helmet_png__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./images/Helmet.png */ \"./web-src/images/Helmet.png\");\n/* harmony import */ var _images_Helmet_png__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_images_Helmet_png__WEBPACK_IMPORTED_MODULE_15__);\n/* harmony import */ var _images_Smash_png__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./images/Smash.png */ \"./web-src/images/Smash.png\");\n/* harmony import */ var _images_Smash_png__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(_images_Smash_png__WEBPACK_IMPORTED_MODULE_16__);\n/* harmony import */ var _images_Lightning_png__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./images/Lightning.png */ \"./web-src/images/Lightning.png\");\n/* harmony import */ var _images_Lightning_png__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(_images_Lightning_png__WEBPACK_IMPORTED_MODULE_17__);\n/* harmony import */ var _images_Earthquake_png__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./images/Earthquake.png */ \"./web-src/images/Earthquake.png\");\n/* harmony import */ var _images_Earthquake_png__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(_images_Earthquake_png__WEBPACK_IMPORTED_MODULE_18__);\n/* harmony import */ var _images_Twist_png__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./images/Twist.png */ \"./web-src/images/Twist.png\");\n/* harmony import */ var _images_Twist_png__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(_images_Twist_png__WEBPACK_IMPORTED_MODULE_19__);\n/* harmony import */ var _images_Bend_png__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./images/Bend.png */ \"./web-src/images/Bend.png\");\n/* harmony import */ var _images_Bend_png__WEBPACK_IMPORTED_MODULE_20___default = /*#__PURE__*/__webpack_require__.n(_images_Bend_png__WEBPACK_IMPORTED_MODULE_20__);\n/* harmony import */ var _images_JugglingKnives_png__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./images/JugglingKnives.png */ \"./web-src/images/JugglingKnives.png\");\n/* harmony import */ var _images_JugglingKnives_png__WEBPACK_IMPORTED_MODULE_21___default = /*#__PURE__*/__webpack_require__.n(_images_JugglingKnives_png__WEBPACK_IMPORTED_MODULE_21__);\n/* harmony import */ var _images_AcidSpray_png__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./images/AcidSpray.png */ \"./web-src/images/AcidSpray.png\");\n/* harmony import */ var _images_AcidSpray_png__WEBPACK_IMPORTED_MODULE_22___default = /*#__PURE__*/__webpack_require__.n(_images_AcidSpray_png__WEBPACK_IMPORTED_MODULE_22__);\n/* harmony import */ var _images_Nose_png__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./images/Nose.png */ \"./web-src/images/Nose.png\");\n/* harmony import */ var _images_Nose_png__WEBPACK_IMPORTED_MODULE_23___default = /*#__PURE__*/__webpack_require__.n(_images_Nose_png__WEBPACK_IMPORTED_MODULE_23__);\n/* harmony import */ var _images_BackwardsMoustachio_png__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./images/BackwardsMoustachio.png */ \"./web-src/images/BackwardsMoustachio.png\");\n/* harmony import */ var _images_BackwardsMoustachio_png__WEBPACK_IMPORTED_MODULE_24___default = /*#__PURE__*/__webpack_require__.n(_images_BackwardsMoustachio_png__WEBPACK_IMPORTED_MODULE_24__);\n/* harmony import */ var _images_NoseOfTheTaunted_png__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./images/NoseOfTheTaunted.png */ \"./web-src/images/NoseOfTheTaunted.png\");\n/* harmony import */ var _images_NoseOfTheTaunted_png__WEBPACK_IMPORTED_MODULE_25___default = /*#__PURE__*/__webpack_require__.n(_images_NoseOfTheTaunted_png__WEBPACK_IMPORTED_MODULE_25__);\n/* harmony import */ var _images_MustacheMash_png__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./images/MustacheMash.png */ \"./web-src/images/MustacheMash.png\");\n/* harmony import */ var _images_MustacheMash_png__WEBPACK_IMPORTED_MODULE_26___default = /*#__PURE__*/__webpack_require__.n(_images_MustacheMash_png__WEBPACK_IMPORTED_MODULE_26__);\n/* harmony import */ var _images_BigHairyDeal_png__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./images/BigHairyDeal.png */ \"./web-src/images/BigHairyDeal.png\");\n/* harmony import */ var _images_BigHairyDeal_png__WEBPACK_IMPORTED_MODULE_27___default = /*#__PURE__*/__webpack_require__.n(_images_BigHairyDeal_png__WEBPACK_IMPORTED_MODULE_27__);\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nconst srcs = {Kick: (_images_Kick_png__WEBPACK_IMPORTED_MODULE_0___default()), NinjaSword: (_images_NinjaSword_png__WEBPACK_IMPORTED_MODULE_1___default()), Nunchucks: (_images_Nunchucks_png__WEBPACK_IMPORTED_MODULE_2___default()), ShadowFireball: (_images_ShadowFireball_png__WEBPACK_IMPORTED_MODULE_3___default()), ShadowSlip: (_images_ShadowSlip_png__WEBPACK_IMPORTED_MODULE_4___default()), RunInCircles: (_images_RunInCircles_png__WEBPACK_IMPORTED_MODULE_5___default()), LightningFastKarateChop: (_images_LightningFastKarateChop_png__WEBPACK_IMPORTED_MODULE_6___default()), Rampage: (_images_Rampage_png__WEBPACK_IMPORTED_MODULE_7___default()), Muscle: (_images_Muscle_png__WEBPACK_IMPORTED_MODULE_8___default()), Zap: (_images_Zap_png__WEBPACK_IMPORTED_MODULE_9___default()), Regenerate: (_images_Regenerate_png__WEBPACK_IMPORTED_MODULE_10___default()), Gravedigger: (_images_Gravedigger_png__WEBPACK_IMPORTED_MODULE_11___default()), ZombieCorps: (_images_ZombieCorps_png__WEBPACK_IMPORTED_MODULE_12___default()), Apocalypse: (_images_Apocalypse_png__WEBPACK_IMPORTED_MODULE_13___default()), SamuraiSword: (_images_SamuraiSword_png__WEBPACK_IMPORTED_MODULE_14___default()), Helmet: (_images_Helmet_png__WEBPACK_IMPORTED_MODULE_15___default()), Smash: (_images_Smash_png__WEBPACK_IMPORTED_MODULE_16___default()), Lightning: (_images_Lightning_png__WEBPACK_IMPORTED_MODULE_17___default()), Earthquake: (_images_Earthquake_png__WEBPACK_IMPORTED_MODULE_18___default()), Twist: (_images_Twist_png__WEBPACK_IMPORTED_MODULE_19___default()), Bend: (_images_Bend_png__WEBPACK_IMPORTED_MODULE_20___default()), JugglingKnives: (_images_JugglingKnives_png__WEBPACK_IMPORTED_MODULE_21___default()), AcidSpray: (_images_AcidSpray_png__WEBPACK_IMPORTED_MODULE_22___default()), Nose: (_images_Nose_png__WEBPACK_IMPORTED_MODULE_23___default()), BackwardsMoustachio: (_images_BackwardsMoustachio_png__WEBPACK_IMPORTED_MODULE_24___default()), NoseOfTheTaunted: (_images_NoseOfTheTaunted_png__WEBPACK_IMPORTED_MODULE_25___default()), MustacheMash: (_images_MustacheMash_png__WEBPACK_IMPORTED_MODULE_26___default()), BigHairyDeal: (_images_BigHairyDeal_png__WEBPACK_IMPORTED_MODULE_27___default()), };\n\nconst imageLoadPromises = [];\n\nconst images = Object.keys(srcs).reduce((obj, srcKey) => {\n  const img = new Image();\n  img.src = srcs[srcKey];\n\n  imageLoadPromises.push(new Promise((resolve, reject) => {\n    img.addEventListener('load', () => {\n      resolve();\n    });\n  }));\n\n  return {\n    ...obj,\n    [srcKey]: img,\n  };\n}, {});\n\nimages.waitForAllToLoad = Promise.all(imageLoadPromises);\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (images);\n\n\n//# sourceURL=webpack:///./web-src/images.js?");
 
 /***/ }),
 
@@ -44,6 +44,72 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _ima
 /***/ (function(module, exports, __webpack_require__) {
 
 eval("module.exports = __webpack_require__.p + \"33726fbcb7dd80e928f64c19f6b77381.png\";\n\n//# sourceURL=webpack:///./web-src/images/AcidSpray.png?");
+
+/***/ }),
+
+/***/ "./web-src/images/Apocalypse.png":
+/*!***************************************!*\
+  !*** ./web-src/images/Apocalypse.png ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("module.exports = __webpack_require__.p + \"28c483710cff64d10e2f959490227081.png\";\n\n//# sourceURL=webpack:///./web-src/images/Apocalypse.png?");
+
+/***/ }),
+
+/***/ "./web-src/images/BackwardsMoustachio.png":
+/*!************************************************!*\
+  !*** ./web-src/images/BackwardsMoustachio.png ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("module.exports = __webpack_require__.p + \"6dce7f3372a412719d738f3f89b9e6eb.png\";\n\n//# sourceURL=webpack:///./web-src/images/BackwardsMoustachio.png?");
+
+/***/ }),
+
+/***/ "./web-src/images/Bend.png":
+/*!*********************************!*\
+  !*** ./web-src/images/Bend.png ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("module.exports = __webpack_require__.p + \"29120fc1cb5592377dd92daf2825faf0.png\";\n\n//# sourceURL=webpack:///./web-src/images/Bend.png?");
+
+/***/ }),
+
+/***/ "./web-src/images/BigHairyDeal.png":
+/*!*****************************************!*\
+  !*** ./web-src/images/BigHairyDeal.png ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("module.exports = __webpack_require__.p + \"812b2f5d5eb73b91442b055527b4b1cf.png\";\n\n//# sourceURL=webpack:///./web-src/images/BigHairyDeal.png?");
+
+/***/ }),
+
+/***/ "./web-src/images/Earthquake.png":
+/*!***************************************!*\
+  !*** ./web-src/images/Earthquake.png ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("module.exports = __webpack_require__.p + \"2fc028ad14099e84fffc65b5c1d1a56c.png\";\n\n//# sourceURL=webpack:///./web-src/images/Earthquake.png?");
+
+/***/ }),
+
+/***/ "./web-src/images/Gravedigger.png":
+/*!****************************************!*\
+  !*** ./web-src/images/Gravedigger.png ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("module.exports = __webpack_require__.p + \"598356ddf665c325e46453ed3ac2449d.png\";\n\n//# sourceURL=webpack:///./web-src/images/Gravedigger.png?");
 
 /***/ }),
 
@@ -80,6 +146,28 @@ eval("module.exports = __webpack_require__.p + \"d7fc054174122b3227838a30243d994
 
 /***/ }),
 
+/***/ "./web-src/images/Lightning.png":
+/*!**************************************!*\
+  !*** ./web-src/images/Lightning.png ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("module.exports = __webpack_require__.p + \"545e9144c338a09d0964fe686cb1fdf0.png\";\n\n//# sourceURL=webpack:///./web-src/images/Lightning.png?");
+
+/***/ }),
+
+/***/ "./web-src/images/LightningFastKarateChop.png":
+/*!****************************************************!*\
+  !*** ./web-src/images/LightningFastKarateChop.png ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("module.exports = __webpack_require__.p + \"c1b23209a62a6d4bedda793c53d70a95.png\";\n\n//# sourceURL=webpack:///./web-src/images/LightningFastKarateChop.png?");
+
+/***/ }),
+
 /***/ "./web-src/images/Muscle.png":
 /*!***********************************!*\
   !*** ./web-src/images/Muscle.png ***!
@@ -88,6 +176,17 @@ eval("module.exports = __webpack_require__.p + \"d7fc054174122b3227838a30243d994
 /***/ (function(module, exports, __webpack_require__) {
 
 eval("module.exports = __webpack_require__.p + \"2ed09b57e356edad8d9cdef4218babe7.png\";\n\n//# sourceURL=webpack:///./web-src/images/Muscle.png?");
+
+/***/ }),
+
+/***/ "./web-src/images/MustacheMash.png":
+/*!*****************************************!*\
+  !*** ./web-src/images/MustacheMash.png ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("module.exports = __webpack_require__.p + \"b43550c7072049581379897a765026a8.png\";\n\n//# sourceURL=webpack:///./web-src/images/MustacheMash.png?");
 
 /***/ }),
 
@@ -113,6 +212,17 @@ eval("module.exports = __webpack_require__.p + \"8e28dae4b0729f881e7039cd45f6650
 
 /***/ }),
 
+/***/ "./web-src/images/NoseOfTheTaunted.png":
+/*!*********************************************!*\
+  !*** ./web-src/images/NoseOfTheTaunted.png ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("module.exports = __webpack_require__.p + \"23f8548f2a79bdfbf5c75d567167ae82.png\";\n\n//# sourceURL=webpack:///./web-src/images/NoseOfTheTaunted.png?");
+
+/***/ }),
+
 /***/ "./web-src/images/Nunchucks.png":
 /*!**************************************!*\
   !*** ./web-src/images/Nunchucks.png ***!
@@ -121,17 +231,6 @@ eval("module.exports = __webpack_require__.p + \"8e28dae4b0729f881e7039cd45f6650
 /***/ (function(module, exports, __webpack_require__) {
 
 eval("module.exports = __webpack_require__.p + \"c18eadb805abd3e802803c4423aec15c.png\";\n\n//# sourceURL=webpack:///./web-src/images/Nunchucks.png?");
-
-/***/ }),
-
-/***/ "./web-src/images/Placeholder.png":
-/*!****************************************!*\
-  !*** ./web-src/images/Placeholder.png ***!
-  \****************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("module.exports = __webpack_require__.p + \"920b41382ffdb524d365ac8f2ff2b2eb.png\";\n\n//# sourceURL=webpack:///./web-src/images/Placeholder.png?");
 
 /***/ }),
 
@@ -146,6 +245,28 @@ eval("module.exports = __webpack_require__.p + \"5c41cffad63a5b67a3072fd52273218
 
 /***/ }),
 
+/***/ "./web-src/images/Regenerate.png":
+/*!***************************************!*\
+  !*** ./web-src/images/Regenerate.png ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("module.exports = __webpack_require__.p + \"95abe119d6b03eeee48562e7e028a6a4.png\";\n\n//# sourceURL=webpack:///./web-src/images/Regenerate.png?");
+
+/***/ }),
+
+/***/ "./web-src/images/RunInCircles.png":
+/*!*****************************************!*\
+  !*** ./web-src/images/RunInCircles.png ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("module.exports = __webpack_require__.p + \"2f3b1be627a28b780321e09343274106.png\";\n\n//# sourceURL=webpack:///./web-src/images/RunInCircles.png?");
+
+/***/ }),
+
 /***/ "./web-src/images/SamuraiSword.png":
 /*!*****************************************!*\
   !*** ./web-src/images/SamuraiSword.png ***!
@@ -154,6 +275,28 @@ eval("module.exports = __webpack_require__.p + \"5c41cffad63a5b67a3072fd52273218
 /***/ (function(module, exports, __webpack_require__) {
 
 eval("module.exports = __webpack_require__.p + \"9e27cf6edbe1d107a385d0f7046124ca.png\";\n\n//# sourceURL=webpack:///./web-src/images/SamuraiSword.png?");
+
+/***/ }),
+
+/***/ "./web-src/images/ShadowFireball.png":
+/*!*******************************************!*\
+  !*** ./web-src/images/ShadowFireball.png ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("module.exports = __webpack_require__.p + \"140948bb3ebb27033f3ed626a87cc485.png\";\n\n//# sourceURL=webpack:///./web-src/images/ShadowFireball.png?");
+
+/***/ }),
+
+/***/ "./web-src/images/ShadowSlip.png":
+/*!***************************************!*\
+  !*** ./web-src/images/ShadowSlip.png ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("module.exports = __webpack_require__.p + \"cd70c5d54494f3b652628c9edf7625c7.png\";\n\n//# sourceURL=webpack:///./web-src/images/ShadowSlip.png?");
 
 /***/ }),
 
@@ -168,6 +311,17 @@ eval("module.exports = __webpack_require__.p + \"c18823d9bf72ff812ca449cb3054772
 
 /***/ }),
 
+/***/ "./web-src/images/Twist.png":
+/*!**********************************!*\
+  !*** ./web-src/images/Twist.png ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("module.exports = __webpack_require__.p + \"257ddeaa56614f57476f17fe845e4cfa.png\";\n\n//# sourceURL=webpack:///./web-src/images/Twist.png?");
+
+/***/ }),
+
 /***/ "./web-src/images/Zap.png":
 /*!********************************!*\
   !*** ./web-src/images/Zap.png ***!
@@ -176,6 +330,17 @@ eval("module.exports = __webpack_require__.p + \"c18823d9bf72ff812ca449cb3054772
 /***/ (function(module, exports, __webpack_require__) {
 
 eval("module.exports = __webpack_require__.p + \"7329f3b81c7bab3d555f1945e0585fcd.png\";\n\n//# sourceURL=webpack:///./web-src/images/Zap.png?");
+
+/***/ }),
+
+/***/ "./web-src/images/ZombieCorps.png":
+/*!****************************************!*\
+  !*** ./web-src/images/ZombieCorps.png ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("module.exports = __webpack_require__.p + \"28d9191ddfef0382fd21cc712cc6dee9.png\";\n\n//# sourceURL=webpack:///./web-src/images/ZombieCorps.png?");
 
 /***/ }),
 
@@ -223,7 +388,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"SinglePlayerNZSCWebInterface\", function() { return SinglePlayerNZSCWebInterface; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"OutputWebInterface\", function() { return OutputWebInterface; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"__wbindgen_throw\", function() { return __wbindgen_throw; });\n/* harmony import */ var _nzsc_single_player_web_bg__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./nzsc_single_player_web_bg */ \"./web-src/nzsc_single_player_web_bg.wasm\");\n/* tslint:disable */\n\n\nconst TextDecoder = typeof self === 'object' && self.TextDecoder\n    ? self.TextDecoder\n    : __webpack_require__(/*! util */ \"./node_modules/util/util.js\").TextDecoder;\n\nlet cachedDecoder = new TextDecoder('utf-8');\n\nlet cachegetUint8Memory = null;\nfunction getUint8Memory() {\n    if (cachegetUint8Memory === null ||\n        cachegetUint8Memory.buffer !== _nzsc_single_player_web_bg__WEBPACK_IMPORTED_MODULE_0__[\"memory\"].buffer)\n        cachegetUint8Memory = new Uint8Array(_nzsc_single_player_web_bg__WEBPACK_IMPORTED_MODULE_0__[\"memory\"].buffer);\n    return cachegetUint8Memory;\n}\n\nfunction getStringFromWasm(ptr, len) {\n    return cachedDecoder.decode(getUint8Memory().subarray(ptr, ptr + len));\n}\n\nlet cachedGlobalArgumentPtr = null;\nfunction globalArgumentPtr() {\n    if (cachedGlobalArgumentPtr === null)\n        cachedGlobalArgumentPtr = _nzsc_single_player_web_bg__WEBPACK_IMPORTED_MODULE_0__[\"__wbindgen_global_argument_ptr\"]();\n    return cachedGlobalArgumentPtr;\n}\n\nlet cachegetUint32Memory = null;\nfunction getUint32Memory() {\n    if (cachegetUint32Memory === null ||\n        cachegetUint32Memory.buffer !== _nzsc_single_player_web_bg__WEBPACK_IMPORTED_MODULE_0__[\"memory\"].buffer)\n        cachegetUint32Memory = new Uint32Array(_nzsc_single_player_web_bg__WEBPACK_IMPORTED_MODULE_0__[\"memory\"].buffer);\n    return cachegetUint32Memory;\n}\n\nconst TextEncoder = typeof self === 'object' && self.TextEncoder\n    ? self.TextEncoder\n    : __webpack_require__(/*! util */ \"./node_modules/util/util.js\").TextEncoder;\n\nlet cachedEncoder = new TextEncoder('utf-8');\n\nfunction passStringToWasm(arg) {\n\n    const buf = cachedEncoder.encode(arg);\n    const ptr = _nzsc_single_player_web_bg__WEBPACK_IMPORTED_MODULE_0__[\"__wbindgen_malloc\"](buf.length);\n    getUint8Memory().set(buf, ptr);\n    return [ptr, buf.length];\n}\n\nclass SinglePlayerNZSCWebInterface {\n\n                static __construct(ptr) {\n                    return new SinglePlayerNZSCWebInterface(ptr);\n                }\n\n                constructor(ptr) {\n                    this.ptr = ptr;\n                }\n\n            free() {\n                const ptr = this.ptr;\n                this.ptr = 0;\n                _nzsc_single_player_web_bg__WEBPACK_IMPORTED_MODULE_0__[\"__wbg_singleplayernzscwebinterface_free\"](ptr);\n            }\n        static new(arg0) {\n    return SinglePlayerNZSCWebInterface.__construct(_nzsc_single_player_web_bg__WEBPACK_IMPORTED_MODULE_0__[\"singleplayernzscwebinterface_new\"](arg0));\n}\ninitial_output() {\n    return OutputWebInterface.__construct(_nzsc_single_player_web_bg__WEBPACK_IMPORTED_MODULE_0__[\"singleplayernzscwebinterface_initial_output\"](this.ptr));\n}\nnext(arg0) {\n    const [ptr0, len0] = passStringToWasm(arg0);\n    try {\n        return OutputWebInterface.__construct(_nzsc_single_player_web_bg__WEBPACK_IMPORTED_MODULE_0__[\"singleplayernzscwebinterface_next\"](this.ptr, ptr0, len0));\n    } finally {\n        _nzsc_single_player_web_bg__WEBPACK_IMPORTED_MODULE_0__[\"__wbindgen_free\"](ptr0, len0 * 1);\n    }\n}\n}\n\nclass OutputWebInterface {\n\n                static __construct(ptr) {\n                    return new OutputWebInterface(ptr);\n                }\n\n                constructor(ptr) {\n                    this.ptr = ptr;\n                }\n\n            free() {\n                const ptr = this.ptr;\n                this.ptr = 0;\n                _nzsc_single_player_web_bg__WEBPACK_IMPORTED_MODULE_0__[\"__wbg_outputwebinterface_free\"](ptr);\n            }\n        notifications() {\n    const retptr = globalArgumentPtr();\n    _nzsc_single_player_web_bg__WEBPACK_IMPORTED_MODULE_0__[\"outputwebinterface_notifications\"](retptr, this.ptr);\n    const mem = getUint32Memory();\n    const ptr = mem[retptr / 4];\n    const len = mem[retptr / 4 + 1];\n    const realRet = getStringFromWasm(ptr, len);\n    _nzsc_single_player_web_bg__WEBPACK_IMPORTED_MODULE_0__[\"__wbindgen_free\"](ptr, len * 1);\n    return realRet;\n}\nquestion() {\n    const retptr = globalArgumentPtr();\n    _nzsc_single_player_web_bg__WEBPACK_IMPORTED_MODULE_0__[\"outputwebinterface_question\"](retptr, this.ptr);\n    const mem = getUint32Memory();\n    const ptr = mem[retptr / 4];\n    const len = mem[retptr / 4 + 1];\n    const realRet = getStringFromWasm(ptr, len);\n    _nzsc_single_player_web_bg__WEBPACK_IMPORTED_MODULE_0__[\"__wbindgen_free\"](ptr, len * 1);\n    return realRet;\n}\n}\n\nfunction __wbindgen_throw(ptr, len) {\n    throw new Error(getStringFromWasm(ptr, len));\n}\n\n\n\n//# sourceURL=webpack:///./web-src/nzsc_single_player_web.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"SinglePlayerNZSCWebInterface\", function() { return SinglePlayerNZSCWebInterface; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"OutputWebInterface\", function() { return OutputWebInterface; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"__wbindgen_throw\", function() { return __wbindgen_throw; });\n/* harmony import */ var _nzsc_single_player_web_bg__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./nzsc_single_player_web_bg */ \"./web-src/nzsc_single_player_web_bg.wasm\");\n/* tslint:disable */\n\n\nconst TextDecoder = typeof self === 'object' && self.TextDecoder\n    ? self.TextDecoder\n    : __webpack_require__(/*! util */ \"./node_modules/util/util.js\").TextDecoder;\n\nlet cachedDecoder = new TextDecoder('utf-8');\n\nlet cachegetUint8Memory = null;\nfunction getUint8Memory() {\n    if (cachegetUint8Memory === null ||\n        cachegetUint8Memory.buffer !== _nzsc_single_player_web_bg__WEBPACK_IMPORTED_MODULE_0__[\"memory\"].buffer)\n        cachegetUint8Memory = new Uint8Array(_nzsc_single_player_web_bg__WEBPACK_IMPORTED_MODULE_0__[\"memory\"].buffer);\n    return cachegetUint8Memory;\n}\n\nfunction getStringFromWasm(ptr, len) {\n    return cachedDecoder.decode(getUint8Memory().subarray(ptr, ptr + len));\n}\n\nlet cachedGlobalArgumentPtr = null;\nfunction globalArgumentPtr() {\n    if (cachedGlobalArgumentPtr === null)\n        cachedGlobalArgumentPtr = _nzsc_single_player_web_bg__WEBPACK_IMPORTED_MODULE_0__[\"__wbindgen_global_argument_ptr\"]();\n    return cachedGlobalArgumentPtr;\n}\n\nlet cachegetUint32Memory = null;\nfunction getUint32Memory() {\n    if (cachegetUint32Memory === null ||\n        cachegetUint32Memory.buffer !== _nzsc_single_player_web_bg__WEBPACK_IMPORTED_MODULE_0__[\"memory\"].buffer)\n        cachegetUint32Memory = new Uint32Array(_nzsc_single_player_web_bg__WEBPACK_IMPORTED_MODULE_0__[\"memory\"].buffer);\n    return cachegetUint32Memory;\n}\n\nconst TextEncoder = typeof self === 'object' && self.TextEncoder\n    ? self.TextEncoder\n    : __webpack_require__(/*! util */ \"./node_modules/util/util.js\").TextEncoder;\n\nlet cachedEncoder = new TextEncoder('utf-8');\n\nfunction passStringToWasm(arg) {\n\n    const buf = cachedEncoder.encode(arg);\n    const ptr = _nzsc_single_player_web_bg__WEBPACK_IMPORTED_MODULE_0__[\"__wbindgen_malloc\"](buf.length);\n    getUint8Memory().set(buf, ptr);\n    return [ptr, buf.length];\n}\n\nclass SinglePlayerNZSCWebInterface {\n\n                static __construct(ptr) {\n                    return new SinglePlayerNZSCWebInterface(ptr);\n                }\n\n                constructor(ptr) {\n                    this.ptr = ptr;\n                }\n\n            free() {\n                const ptr = this.ptr;\n                this.ptr = 0;\n                _nzsc_single_player_web_bg__WEBPACK_IMPORTED_MODULE_0__[\"__wbg_singleplayernzscwebinterface_free\"](ptr);\n            }\n        static new(arg0) {\n    return SinglePlayerNZSCWebInterface.__construct(_nzsc_single_player_web_bg__WEBPACK_IMPORTED_MODULE_0__[\"singleplayernzscwebinterface_new\"](arg0));\n}\ninitial_output() {\n    return OutputWebInterface.__construct(_nzsc_single_player_web_bg__WEBPACK_IMPORTED_MODULE_0__[\"singleplayernzscwebinterface_initial_output\"](this.ptr));\n}\nnext(arg0) {\n    const [ptr0, len0] = passStringToWasm(arg0);\n    try {\n        return OutputWebInterface.__construct(_nzsc_single_player_web_bg__WEBPACK_IMPORTED_MODULE_0__[\"singleplayernzscwebinterface_next\"](this.ptr, ptr0, len0));\n    } finally {\n        _nzsc_single_player_web_bg__WEBPACK_IMPORTED_MODULE_0__[\"__wbindgen_free\"](ptr0, len0 * 1);\n    }\n}\n}\n\nclass OutputWebInterface {\n\n                static __construct(ptr) {\n                    return new OutputWebInterface(ptr);\n                }\n\n                constructor(ptr) {\n                    this.ptr = ptr;\n                }\n\n            free() {\n                const ptr = this.ptr;\n                this.ptr = 0;\n                _nzsc_single_player_web_bg__WEBPACK_IMPORTED_MODULE_0__[\"__wbg_outputwebinterface_free\"](ptr);\n            }\n        notifications() {\n    const retptr = globalArgumentPtr();\n    _nzsc_single_player_web_bg__WEBPACK_IMPORTED_MODULE_0__[\"outputwebinterface_notifications\"](retptr, this.ptr);\n    const mem = getUint32Memory();\n    const ptr = mem[retptr / 4];\n    const len = mem[retptr / 4 + 1];\n    const realRet = getStringFromWasm(ptr, len).slice();\n    _nzsc_single_player_web_bg__WEBPACK_IMPORTED_MODULE_0__[\"__wbindgen_free\"](ptr, len * 1);\n    return realRet;\n}\nquestion() {\n    const retptr = globalArgumentPtr();\n    _nzsc_single_player_web_bg__WEBPACK_IMPORTED_MODULE_0__[\"outputwebinterface_question\"](retptr, this.ptr);\n    const mem = getUint32Memory();\n    const ptr = mem[retptr / 4];\n    const len = mem[retptr / 4 + 1];\n    const realRet = getStringFromWasm(ptr, len).slice();\n    _nzsc_single_player_web_bg__WEBPACK_IMPORTED_MODULE_0__[\"__wbindgen_free\"](ptr, len * 1);\n    return realRet;\n}\n}\n\nfunction __wbindgen_throw(ptr, len) {\n    throw new Error(getStringFromWasm(ptr, len));\n}\n\n\n\n//# sourceURL=webpack:///./web-src/nzsc_single_player_web.js?");
 
 /***/ }),
 
@@ -231,7 +396,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /*!************************************************!*\
   !*** ./web-src/nzsc_single_player_web_bg.wasm ***!
   \************************************************/
-/*! exports provided: memory, __wbg_singleplayernzscwebinterface_free, __wbg_outputwebinterface_free, outputwebinterface_notifications, outputwebinterface_question, singleplayernzscwebinterface_new, singleplayernzscwebinterface_initial_output, singleplayernzscwebinterface_next, __wbindgen_global_argument_ptr, __wbindgen_malloc, __wbindgen_free */
+/*! exports provided: memory, __wbg_singleplayernzscwebinterface_free, __wbg_outputwebinterface_free, outputwebinterface_notifications, outputwebinterface_question, singleplayernzscwebinterface_new, singleplayernzscwebinterface_initial_output, singleplayernzscwebinterface_next, __wbindgen_malloc, __wbindgen_free, __wbindgen_global_argument_ptr */
 /***/ (function(module, exports, __webpack_require__) {
 
 eval("\"use strict\";\n// Instantiate WebAssembly module\nvar instance = __webpack_require__.w[module.i];\n// export exports from WebAssembly module\nmodule.exports = instance.exports;\n// exec imports from WebAssembly module (for esm order)\n__webpack_require__(/*! ./nzsc_single_player_web */ \"./web-src/nzsc_single_player_web.js\");\n// exec wasm module\ninstance.exports.__webpack_init__()\n\n//# sourceURL=webpack:///./web-src/nzsc_single_player_web_bg.wasm?");

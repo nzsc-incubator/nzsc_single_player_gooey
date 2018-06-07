@@ -100,7 +100,7 @@ export class OutputWebInterface {
     const mem = getUint32Memory();
     const ptr = mem[retptr / 4];
     const len = mem[retptr / 4 + 1];
-    const realRet = getStringFromWasm(ptr, len);
+    const realRet = getStringFromWasm(ptr, len).slice();
     wasm.__wbindgen_free(ptr, len * 1);
     return realRet;
 }
@@ -110,7 +110,7 @@ question() {
     const mem = getUint32Memory();
     const ptr = mem[retptr / 4];
     const len = mem[retptr / 4 + 1];
-    const realRet = getStringFromWasm(ptr, len);
+    const realRet = getStringFromWasm(ptr, len).slice();
     wasm.__wbindgen_free(ptr, len * 1);
     return realRet;
 }
