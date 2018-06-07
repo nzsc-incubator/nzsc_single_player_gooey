@@ -2,6 +2,7 @@ import { noSpace } from './logos';
 
 const colors = {
   '#111': `
+    NoBooster
     Kick
     Nunchucks
     ShadowFireball

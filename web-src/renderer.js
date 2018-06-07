@@ -10,7 +10,6 @@ import images from './images';
 //const ACCELERATOR = 8.0;
 
 const BACKGROUND = '#F1F1F1';
-const BOX_BACKGROUND = '#111';
 const OVERLAY = '#333A';
 const SCORE_COLOR = '#111';
 
@@ -22,12 +21,12 @@ const render = (snap) => {
 
       const characterLogoMoves = snap.availableCharacters.map(logoOfCharacter);
 
-      ctx.fillStyle = BOX_BACKGROUND;
-
       for (let i = 0; i < characterLogoMoves.length; i++) {
         const rect = nthRect(i);
         const x = rect[0] + 1800 * (1 - snap.completionFactor);
         const [, y, w, h] = rect;
+
+        ctx.fillStyle = getBackgroundColorOf(characterLogoMoves[i]);
         ctx.fillRect(x, y, w, h);
 
         ctx.drawImage(images[characterLogoMoves[i]], x, 300, 400, 400);
@@ -43,12 +42,12 @@ const render = (snap) => {
       const previouslyAvailableCharacterLogoMoves = snap.previouslyAvailableCharacters.map(logoOfCharacter);
       const availableCharacterLogoMoves = snap.availableCharacters.map(logoOfCharacter);
 
-      ctx.fillStyle = BOX_BACKGROUND;
-
       for (let i = 0; i < previouslyAvailableCharacterLogoMoves.length; i++) {
         const rect = nthRect(i);
         const x = rect[0] + 1800 * (0 - snap.completionFactor);
         const [, y, w, h] = rect;
+
+        ctx.fillStyle = getBackgroundColorOf(previouslyAvailableCharacterLogoMoves[i]);
         ctx.fillRect(x, y, w, h);
 
         ctx.drawImage(images[previouslyAvailableCharacterLogoMoves[i]], x, 300, 400, 400);
@@ -73,12 +72,12 @@ const render = (snap) => {
       const characterLogoMoves = snap.previouslyAvailableCharacters.map(logoOfCharacter);
       const boosterLogoMoves = snap.availableBoosters.map(logoOfBooster);
 
-      ctx.fillStyle = BOX_BACKGROUND;
-
       for (let i = 0; i < characterLogoMoves.length; i++) {
         const rect = nthRect(i);
         const x = rect[0] + 1800 * (0 - snap.completionFactor);
         const [, y, w, h] = rect;
+
+        ctx.fillStyle = getBackgroundColorOf(characterLogoMoves[i]);
         ctx.fillRect(x, y, w, h);
 
         ctx.drawImage(images[characterLogoMoves[i]], x, 300, 400, 400);
@@ -88,6 +87,8 @@ const render = (snap) => {
         const rect = nthRect(i);
         const x = rect[0] + 1800 * (1 - snap.completionFactor);
         const [, y, w, h] = rect;
+
+        ctx.fillStyle = getBackgroundColorOf(boosterLogoMoves[i]);
         ctx.fillRect(x, y, w, h);
 
         ctx.drawImage(images[boosterLogoMoves[i]], x, 300, 400, 400);
@@ -103,12 +104,12 @@ const render = (snap) => {
       const boosterLogoMoves = snap.previouslyAvailableBoosters.map(logoOfBooster);
       const availableMoves = snap.availableMoves.map(noSpace);
 
-      ctx.fillStyle = BOX_BACKGROUND;
-
       for (let i = 0; i < boosterLogoMoves.length; i++) {
         const rect = nthRect(i);
         const x = rect[0] + 1800 * (0 - snap.completionFactor);
         const [, y, w, h] = rect;
+
+        ctx.fillStyle = getBackgroundColorOf(boosterLogoMoves[i]);
         ctx.fillRect(x, y, w, h);
 
         ctx.drawImage(images[boosterLogoMoves[i]], x, 300, 400, 400);
