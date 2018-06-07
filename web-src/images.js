@@ -27,7 +27,9 @@ import NoseOfTheTaunted from './images/NoseOfTheTaunted.png';
 import MustacheMash from './images/MustacheMash.png';
 import BigHairyDeal from './images/BigHairyDeal.png';
 
-const srcs = {Kick, NinjaSword, Nunchucks, ShadowFireball, ShadowSlip, RunInCircles, LightningFastKarateChop, Rampage, Muscle, Zap, Regenerate, Gravedigger, ZombieCorps, Apocalypse, SamuraiSword, Helmet, Smash, Lightning, Earthquake, Twist, Bend, JugglingKnives, AcidSpray, Nose, BackwardsMoustachio, NoseOfTheTaunted, MustacheMash, BigHairyDeal, };
+import NoBooster from './images/NoBooster.png';
+
+const srcs = {Kick, NinjaSword, Nunchucks, ShadowFireball, ShadowSlip, RunInCircles, LightningFastKarateChop, Rampage, Muscle, Zap, Regenerate, Gravedigger, ZombieCorps, Apocalypse, SamuraiSword, Helmet, Smash, Lightning, Earthquake, Twist, Bend, JugglingKnives, AcidSpray, Nose, BackwardsMoustachio, NoseOfTheTaunted, MustacheMash, BigHairyDeal, NoBooster, };
 
 const imageLoadPromises = [];
 
