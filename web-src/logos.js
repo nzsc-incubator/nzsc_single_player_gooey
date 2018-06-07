@@ -12,13 +12,13 @@ const logoOfBooster = (booster) => {
   booster = noSpace(booster);
 
   switch (booster) {
-    case 'Shadow': return 'ShadowFireball';
+    case 'Shadow': return 'ShadowSlip';
     case 'Speedy': return 'RunInCircles';
     case 'Regenerative': return 'Regenerate';
     case 'ZombieCorps': return 'ZombieCorps';
     case 'Atlas': return 'Lightning';
     case 'Strong': return 'Bend';
-    case 'Backwards': return 'NoseOfTheTaunted';
+    case 'Backwards': return 'BackwardsMoustachio';
     case 'Moustachio': return 'BigHairyDeal';
     case 'NoBooster': return 'NoBooster';
     default: throw new Error('Illegal booster: ' + booster)
