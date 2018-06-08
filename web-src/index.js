@@ -5,23 +5,7 @@ import images from './images';
 import store from './store';
 import { transitionFromNothingToCharacterScreen } from './transitions';
 
-////////////////
-////////////////
-////////////////
-// Set up constants.
-////////////////
-////////////////
-////////////////
-
 const MAX32 = 2 ** 32 - 1;
-
-////////////////
-////////////////
-////////////////
-// Helpers.
-////////////////
-////////////////
-////////////////
 
 const generateSeed = () => (
   query.overrideSeed === null
@@ -29,18 +13,12 @@ const generateSeed = () => (
     : query.overrideSeed
 );
 
-////////////////
-////////////////
-////////////////
-// Main logic.
-////////////////
-////////////////
-////////////////
+
 
 const newGame = () => {
   const seed = generateSeed();
   const game = SinglePlayerNZSCWebInterface.new(seed);
-  
+
   store.game = game;
   store.currentOutput = game.initial_output();
 
@@ -49,13 +27,7 @@ const newGame = () => {
   });
 };
 
-////////////////
-////////////////
-////////////////
-// Start a game.
-////////////////
-////////////////
-////////////////
+
 
 window.addEventListener('resize', () => {
   correctCanvasDimensions();
@@ -65,7 +37,11 @@ window.addEventListener('resize', () => {
   }
 });
 
+
+
 newGame();
+
+
 
 (function() {
   if('serviceWorker' in navigator) {
