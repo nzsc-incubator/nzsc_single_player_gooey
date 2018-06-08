@@ -1,12 +1,12 @@
 # nzsc_single_player_gooey
 Play NZSC in your browser against the computer!
 
-Click [here](https://nzsc-org.github.io/nzsc_single_player_web) to play the finished product.
+Click [here](https://kylejlin.github.io/nzsc_single_player_gooey) to play the finished product.
 
 If you already know how to play NZSC, you're good to go. Otherwise, read [the handbook](https://nzsc-org.github.io/nzsc_handbook/book/).
 
 ## Query-string flags
-You can optionally pass in flags to the web app via the query-string (e.g., `https://nzsc-org.github.io/nzsc_single_player_web?disable_autofocus&seed=0xbada55`)
+You can optionally pass in flags to the web app via the query-string (e.g., `https://kylejlin.github.io/nzsc_single_player_gooey?disable_autofocus&seed=0xbada55`)
 
 | flag | values | examples | description | default behavior
 | --- | --- | --- | --- | --- |
