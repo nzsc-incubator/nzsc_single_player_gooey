@@ -1,4 +1,4 @@
-import { SinglePlayerNZSCWebInterface } from './nzsc_single_player_web';
+import { SinglePlayerNZSCWebInterface } from './wasm/nzsc_single_player_web';
 import query from './query';
 import { correctCanvasDimensions } from './canvas';
 import images from './images';

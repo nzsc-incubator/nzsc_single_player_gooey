@@ -1,4 +1,4 @@
 cargo +nightly build --release --target wasm32-unknown-unknown \
-&& wasm-bindgen target/wasm32-unknown-unknown/release/nzsc_single_player_web.wasm --out-dir ./web-src \
+&& wasm-bindgen target/wasm32-unknown-unknown/release/nzsc_single_player_web.wasm --out-dir ./web-src/wasm/ \
 && npx webpack \
 && cp -a ./public/. ./build/
