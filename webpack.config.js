@@ -19,6 +19,9 @@ module.exports = {
     ]
   },
   plugins: [
-    new SWPrecacheWebpackPlugin(),
+    new SWPrecacheWebpackPlugin({
+      staticFileGlobs: ['./index.html', './index.css'],
+      mergeStaticsConfig: true,
+    }),
   ]
 };
