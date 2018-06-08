@@ -4,13 +4,16 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
-    "build-debug": "sh scripts/build-debug.sh",
+    "predeploy": "npm run build-release",
+    "deploy": "gh-pages -d build",
+    "build-debug": "echo \"build-debug deprecated. Use build-relase\"; exit 1;",
     "build-release": "sh scripts/build-release.sh"
   },
   "author": "Kyle Lin",
   "license": "MIT",
   "devDependencies": {
     "file-loader": "^1.1.11",
+    "gh-pages": "^1.2.0",
     "sw-precache-webpack-plugin": "^0.11.5",
     "webpack": "^4.8.3",
     "webpack-cli": "^2.1.5"
