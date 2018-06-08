@@ -7,11 +7,14 @@
     "predeploy": "npm run build-release",
     "deploy": "gh-pages -d build",
     "build-debug": "echo \"build-debug deprecated. Use build-relase\"; exit 1;",
-    "build-release": "sh scripts/build-release.sh"
+    "build-release": "sh scripts/build-release.sh",
+    "lint": "eslint web-src/"
   },
   "author": "Kyle Lin",
   "license": "MIT",
   "devDependencies": {
+    "babel-eslint": "^8.2.3",
+    "eslint": "^4.19.1",
     "file-loader": "^1.1.11",
     "gh-pages": "^1.2.0",
     "sw-precache-webpack-plugin": "^0.11.5",

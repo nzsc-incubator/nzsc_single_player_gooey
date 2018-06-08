@@ -37,7 +37,7 @@ const colors = {
     BackwardsMoustachio
     JugglingKnives
   `.trim().split('\n').map(str => str.trim()),
-}
+};
 
 export default (moveName) => {
   for (const color in colors) {

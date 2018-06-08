@@ -28,7 +28,6 @@ const getRectIndexAt = (x, y) => {
   const hm = RECT.horizontalMargin;
   const vm = RECT.verticalMargin;
   const bw = RECT.width;
-  const bh = RECT.height;
 
   if (y < vm || y > (getDimensions().height - vm)) {
     return -1;

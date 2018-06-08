@@ -37,7 +37,7 @@ const images = Object.keys(srcs).reduce((obj, srcKey) => {
   const img = new Image();
   img.src = srcs[srcKey];
 
-  imageLoadPromises.push(new Promise((resolve, reject) => {
+  imageLoadPromises.push(new Promise((resolve) => {
     img.addEventListener('load', () => {
       resolve();
     });

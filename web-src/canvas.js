@@ -27,7 +27,7 @@ const sizeCanvas = (canvas, dimensions) => {
 
 const correctCanvasDimensions = () => {
   sizeCanvas(canvas, DIMENSIONS);
-}
+};
 
 correctCanvasDimensions();
 

@@ -21,7 +21,7 @@ const logoOfBooster = (booster) => {
     case 'Backwards': return 'BackwardsMoustachio';
     case 'Moustachio': return 'BigHairyDeal';
     case 'NoBooster': return 'NoBooster';
-    default: throw new Error('Illegal booster: ' + booster)
+    default: throw new Error('Illegal booster: ' + booster);
   }
 };
 

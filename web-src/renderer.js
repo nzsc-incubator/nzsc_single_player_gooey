@@ -591,7 +591,7 @@ const render = (snap) => {
       break;
     }
 
-    default: console.log('TODO: ' + snap.type)
+    default: console.log('TODO: ' + snap.type);
   }
 };
 
