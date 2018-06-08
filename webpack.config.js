@@ -5,7 +5,7 @@ module.exports = {
   entry: './web-src/load-index-async.js',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname)
+    path: path.resolve(__dirname, 'build')
   },
   mode: "development", // Switch to "production" when ready
   module: {
@@ -20,7 +20,7 @@ module.exports = {
   },
   plugins: [
     new SWPrecacheWebpackPlugin({
-      staticFileGlobs: ['./index.html', './index.css'],
+      staticFileGlobs: ['./public/index.html', './public/index.css'],
       mergeStaticsConfig: true,
     }),
   ]
