@@ -1,0 +1,16 @@
+{
+  "short_name": "NZSC (SP)",
+  "name": "NZSC Single Player",
+  "icons": [
+    {
+      "src": "shadow-slip-rect-bg.png",
+      "sizes": "512x512 256x256 128x128 64x64 32x32 24x24 16x16",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#222222",
+  "background_color": "#F1F1F1",
+  "orientation": "landscape"
+}
