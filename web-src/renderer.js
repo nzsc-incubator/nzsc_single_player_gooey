@@ -274,7 +274,6 @@ const render = (snap) => {
 
         case 2: {
           // Draw human move
-          console.log(snap.whoGetsThePoint, snap.humanMove, snap.computerMove);
           const FADE_RATE = 5;
 
           {
@@ -418,11 +417,11 @@ const render = (snap) => {
         ctx.fillStyle = SCORE_COLOR;
 
         for (let i = 0; i < snap.humanPoints; i++) {
-          ctx.fillRect(100 + i * 30, 850, 20, 100);
+          ctx.fillRect(100 + i * 120, 300, 80, 400);
         }
 
         for (let i = 0; i < snap.computerPoints; i++) {
-          ctx.fillRect(1700 - i * 30, 850, 20, 100);
+          ctx.fillRect(1620 - i * 120, 300, 80, 400);
         }
       }
 
@@ -495,7 +494,6 @@ const render = (snap) => {
 
         case 2: {
           // Draw human move
-          console.log(snap.whoGetsThePoint, snap.humanMove, snap.computerMove);
           const FADE_RATE = 5;
 
           {
