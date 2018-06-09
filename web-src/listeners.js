@@ -9,6 +9,8 @@ import store from './store';
 import { canvas, clientToLocalCoords } from './canvas';
 import { getRectIndexAt } from './rect';
 import { getCircleIndexAt } from './circle';
+import { isPlayButtonClicked } from './buttons';
+import newGame from './newGame';
 
 const characterScreenListener = (e) => {
   const [x, y] = clientToLocalCoords(e.clientX, e.clientY);
@@ -83,8 +85,19 @@ const moveScreenListener = (e) => {
   }
 };
 
+const playAgainScreenListener = (e) => {
+  const [x, y] = clientToLocalCoords(e.clientX, e.clientY);
+
+  if (!isPlayButtonClicked(x, y)) {
+    return;
+  }
+
+  newGame();
+};
+
 export {
   characterScreenListener,
   boosterScreenListener,
   moveScreenListener,
+  playAgainScreenListener,
 };

@@ -1,6 +1,7 @@
 import { ctx } from './canvas';
 import { nthRect } from './rect';
 import { nthCircle } from './circle';
+import { playButtonCircle, playButtonTriangle } from './buttons';
 import lerp from './lerp';
 import { getPhase, getPhaseTime } from './phases';
 import { logoOfCharacter, logoOfBooster, noSpace } from './logos';
@@ -415,6 +416,7 @@ const render = (snap) => {
         ctx.fillStyle = OVERLAY;
         ctx.fillRect(0, 0, 1800, 1000);
       } else {
+        // Draw human score
         ctx.fillStyle = snap.humanPoints > snap.computerPoints
           ? SCORE_COLOR
           : LOSING_SCORE_COLOR;
@@ -423,6 +425,7 @@ const render = (snap) => {
           ctx.fillRect(100 + i * 120, 300, 80, 400);
         }
 
+        // Draw computer score
         ctx.fillStyle = snap.computerPoints > snap.humanPoints
           ? SCORE_COLOR
           : LOSING_SCORE_COLOR;
@@ -430,6 +433,21 @@ const render = (snap) => {
         for (let i = 0; i < snap.computerPoints; i++) {
           ctx.fillRect(1620 - i * 120, 300, 80, 400);
         }
+
+        // Draw play again button
+        ctx.fillStyle = playButtonCircle.color;
+        ctx.beginPath();
+        ctx.arc(900, 500, playButtonCircle.radius, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.closePath();
+
+        ctx.fillStyle = playButtonTriangle.color;
+        ctx.beginPath();
+        ctx.moveTo(playButtonTriangle.vertices[0][0], playButtonTriangle.vertices[0][1]);
+        ctx.lineTo(playButtonTriangle.vertices[1][0], playButtonTriangle.vertices[1][1]);
+        ctx.lineTo(playButtonTriangle.vertices[2][0], playButtonTriangle.vertices[2][1]);
+        ctx.closePath();
+        ctx.fill();
       }
 
       const phase = getPhase(snap.completionFactor, PHASE_LENGTHS);

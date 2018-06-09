@@ -2,6 +2,7 @@ import {
   characterScreenListener,
   boosterScreenListener,
   moveScreenListener,
+  playAgainScreenListener,
 } from './listeners';
 import store from './store';
 import renderer from './renderer';
@@ -292,7 +293,7 @@ const transitionToFinalMoveClash = () => {
     if (t < finishTime) {
       requestAnimationFrame(render);
     } else {
-      //canvas.addEventListener('click', finalScreenListener);
+      canvas.addEventListener('click', playAgainScreenListener);
     }
   };
 
