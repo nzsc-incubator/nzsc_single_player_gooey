@@ -12,6 +12,7 @@ import images from './images';
 const BACKGROUND = '#F1F1F1';
 const OVERLAY = '#333A';
 const SCORE_COLOR = '#111';
+const LOSING_SCORE_COLOR = '#111A';
 
 const render = (snap) => {
   switch (snap.type) {
@@ -414,11 +415,17 @@ const render = (snap) => {
         ctx.fillStyle = OVERLAY;
         ctx.fillRect(0, 0, 1800, 1000);
       } else {
-        ctx.fillStyle = SCORE_COLOR;
+        ctx.fillStyle = snap.humanPoints > snap.computerPoints
+          ? SCORE_COLOR
+          : LOSING_SCORE_COLOR;
 
         for (let i = 0; i < snap.humanPoints; i++) {
           ctx.fillRect(100 + i * 120, 300, 80, 400);
         }
+
+        ctx.fillStyle = snap.computerPoints > snap.humanPoints
+          ? SCORE_COLOR
+          : LOSING_SCORE_COLOR;
 
         for (let i = 0; i < snap.computerPoints; i++) {
           ctx.fillRect(1620 - i * 120, 300, 80, 400);
