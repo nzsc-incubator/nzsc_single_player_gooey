@@ -97,15 +97,21 @@ const transitionFromCharacterToCharacterScreen = () => {
 const transitionFromCharacterToBoosterScreen = () => {
   let last = Date.now();
   let t = 0;
-  const finishTime = 500;
+  const finishTime = 2000;
 
   const previouslyAvailableCharacters = JSON.parse(store.previousOutput.question()).availableCharacters;
   const availableBoosters = JSON.parse(store.currentOutput.question()).availableBoosters;
+  const characterSelectionAndHeadstartNotification = JSON.parse(store.currentOutput.notifications())
+    .find((notification) => notification.type === 'CHARACTER_SELECTION_AND_HEADSTART');
+  const { humanCharacter, computerCharacter, whoGetsTheHeadstart } = characterSelectionAndHeadstartNotification;
 
   store.repaint = () => {
     characterToBooster({
       previouslyAvailableCharacters,
       availableBoosters,
+      humanCharacter,
+      computerCharacter,
+      whoGetsTheHeadstart,
       completionFactor: 1,
     });
   };
@@ -122,6 +128,9 @@ const transitionFromCharacterToBoosterScreen = () => {
     characterToBooster({
       previouslyAvailableCharacters,
       availableBoosters,
+      humanCharacter,
+      computerCharacter,
+      whoGetsTheHeadstart,
       completionFactor: t / finishTime,
     });
 
