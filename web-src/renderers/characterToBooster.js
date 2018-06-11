@@ -55,6 +55,7 @@ const characterToBooster = ({
       ctx.drawImage(images[availableBoosterLogoMoves[i]], x, 300, 400, 400);
     }
 
+    /* TODO: find a way to draw scores without blocking boosters
     ctx.fillStyle = SCORE_COLOR;
 
     if (whoGetsTheHeadstart === 'HUMAN') {
@@ -63,6 +64,7 @@ const characterToBooster = ({
     if (whoGetsTheHeadstart === 'COMPUTER') {
       ctx.fillRect(1700, 850, 20, 100);
     }
+    */
   }
 
   const phase = getPhase(completionFactor, PHASE_LENGTHS);
