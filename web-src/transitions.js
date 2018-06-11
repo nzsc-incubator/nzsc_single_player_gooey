@@ -5,7 +5,14 @@ import {
   playAgainScreenListener,
 } from './listeners';
 import store from './store';
-import renderer from './renderer';
+import {
+  nothingToCharacter,
+  characterToCharacter,
+  characterToBooster,
+  boosterToMove,
+  moveClash,
+  finalMoveClash,
+} from './renderers/index';
 import { canvas } from './canvas';
 
 const transitionFromNothingToCharacterScreen = () => {
@@ -16,8 +23,7 @@ const transitionFromNothingToCharacterScreen = () => {
   const availableCharacters = JSON.parse(store.currentOutput.question()).availableCharacters;
 
   store.repaint = () => {
-    renderer.render({
-      type: 'NOTHING_TO_CHARACTER',
+    nothingToCharacter({
       availableCharacters,
       completionFactor: 1,
     });
@@ -32,8 +38,7 @@ const transitionFromNothingToCharacterScreen = () => {
       t = finishTime;
     }
 
-    renderer.render({
-      type: 'NOTHING_TO_CHARACTER',
+    nothingToCharacter({
       availableCharacters,
       completionFactor: t / finishTime,
     });
@@ -57,8 +62,7 @@ const transitionFromCharacterToCharacterScreen = () => {
   const availableCharacters = JSON.parse(store.currentOutput.question()).availableCharacters;
 
   store.repaint = () => {
-    renderer.render({
-      type: 'CHARACTER_TO_CHARACTER',
+    characterToCharacter({
       previouslyAvailableCharacters,
       availableCharacters,
       completionFactor: 1,
@@ -74,8 +78,7 @@ const transitionFromCharacterToCharacterScreen = () => {
       t = finishTime;
     }
 
-    renderer.render({
-      type: 'CHARACTER_TO_CHARACTER',
+    characterToCharacter({
       previouslyAvailableCharacters,
       availableCharacters,
       completionFactor: t / finishTime,
@@ -100,8 +103,7 @@ const transitionFromCharacterToBoosterScreen = () => {
   const availableBoosters = JSON.parse(store.currentOutput.question()).availableBoosters;
 
   store.repaint = () => {
-    renderer.render({
-      type: 'CHARACTER_TO_BOOSTER',
+    characterToBooster({
       previouslyAvailableCharacters,
       availableBoosters,
       completionFactor: 1,
@@ -117,8 +119,7 @@ const transitionFromCharacterToBoosterScreen = () => {
       t = finishTime;
     }
 
-    renderer.render({
-      type: 'CHARACTER_TO_BOOSTER',
+    characterToBooster({
       previouslyAvailableCharacters,
       availableBoosters,
       completionFactor: t / finishTime,
@@ -143,8 +144,7 @@ const transitionFromBoosterToMoveScreen = () => {
   const availableMoves = JSON.parse(store.currentOutput.question()).availableMoves;
 
   store.repaint = () => {
-    renderer.render({
-      type: 'BOOSTER_TO_MOVE',
+    boosterToMove({
       previouslyAvailableBoosters,
       availableMoves,
       completionFactor: 1,
@@ -160,8 +160,7 @@ const transitionFromBoosterToMoveScreen = () => {
       t = finishTime;
     }
 
-    renderer.render({
-      type: 'BOOSTER_TO_MOVE',
+    boosterToMove({
       previouslyAvailableBoosters,
       availableMoves,
       completionFactor: t / finishTime,
@@ -196,8 +195,7 @@ const transitionToMoveClash = () => {
   const { humanPoints, computerPoints } = score;
 
   store.repaint = () => {
-    renderer.render({
-      type: 'MOVE_CLASH',
+    moveClash({
       previouslyAvailableMoves,
       availableMoves,
       humanMove,
@@ -218,8 +216,7 @@ const transitionToMoveClash = () => {
       t = finishTime;
     }
 
-    renderer.render({
-      type: 'MOVE_CLASH',
+    moveClash({
       previouslyAvailableMoves,
       availableMoves,
       humanMove,
@@ -258,8 +255,7 @@ const transitionToFinalMoveClash = () => {
   const { humanPoints, computerPoints } = score;
 
   store.repaint = () => {
-    renderer.render({
-      type: 'FINAL_MOVE_CLASH',
+    finalMoveClash({
       previouslyAvailableMoves,
       humanMove,
       computerMove,
@@ -279,8 +275,7 @@ const transitionToFinalMoveClash = () => {
       t = finishTime;
     }
 
-    renderer.render({
-      type: 'FINAL_MOVE_CLASH',
+    finalMoveClash({
       previouslyAvailableMoves,
       humanMove,
       computerMove,
