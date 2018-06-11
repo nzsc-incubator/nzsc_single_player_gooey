@@ -6,16 +6,20 @@ import getBackgroundColorOf from '../getBackgroundColorOf';
 import { nthRect } from '../rect';
 import { nthCircle } from '../circle';
 
-const boosterToMove = (snap) => {
+const boosterToMove = ({
+  previouslyAvailableBoosters,
+  availableMoves: availableMovesWithSpaces,
+  completionFactor,
+}) => {
   ctx.fillStyle = BACKGROUND;
   ctx.fillRect(0, 0, 1800, 1000);
 
-  const boosterLogoMoves = snap.previouslyAvailableBoosters.map(logoOfBooster);
-  const availableMoves = snap.availableMoves.map(noSpace);
+  const boosterLogoMoves = previouslyAvailableBoosters.map(logoOfBooster);
+  const availableMoves = availableMovesWithSpaces.map(noSpace);
 
   for (let i = 0; i < boosterLogoMoves.length; i++) {
     const rect = nthRect(i);
-    const x = rect[0] + 1800 * (0 - snap.completionFactor);
+    const x = rect[0] + 1800 * (0 - completionFactor);
     const [, y, w, h] = rect;
 
     ctx.fillStyle = getBackgroundColorOf(boosterLogoMoves[i]);
@@ -28,7 +32,7 @@ const boosterToMove = (snap) => {
     ctx.fillStyle = getBackgroundColorOf(availableMoves[i]);
 
     const circle = nthCircle(i);
-    const x = circle[0] + 1800 * (1 - snap.completionFactor);
+    const x = circle[0] + 1800 * (1 - completionFactor);
     const [, y, r] = circle;
     const d = 2 * r;
 

@@ -7,7 +7,16 @@ import { nthCircle } from '../circle';
 import { getPhase, getPhaseTime } from '../phases';
 import lerp from '../lerp';
 
-const moveClash = (snap) => {
+const moveClash = ({
+  previouslyAvailableMoves: previouslyAvailableMovesWithSpaces,
+  availableMoves: availableMovesWithSpaces,
+  humanMove,
+  computerMove,
+  whoGetsThePoint,
+  humanPoints,
+  computerPoints,
+  completionFactor,
+}) => {
   // This animation is divided into 5 phases:
   //
   // 0. Grow - Human move circle expands from starting position into end position.
@@ -21,12 +30,12 @@ const moveClash = (snap) => {
   ctx.fillStyle = BACKGROUND;
   ctx.fillRect(0, 0, 1800, 1000);
 
-  const previouslyAvailableMoves = snap.previouslyAvailableMoves.map(noSpace);
-  const availableMoves = snap.availableMoves.map(noSpace);
+  const previouslyAvailableMoves = previouslyAvailableMovesWithSpaces.map(noSpace);
+  const availableMoves = availableMovesWithSpaces.map(noSpace);
 
-  const selectedHumanMoveIndex = previouslyAvailableMoves.findIndex(move => move === noSpace(snap.humanMove));
+  const selectedHumanMoveIndex = previouslyAvailableMoves.findIndex(move => move === noSpace(humanMove));
 
-  if (snap.completionFactor !== 1) {
+  if (completionFactor !== 1) {
     for (let i = 0; i < previouslyAvailableMoves.length; i++) {
       // Don't draw selected human move.
       if (i === selectedHumanMoveIndex) {
@@ -69,18 +78,18 @@ const moveClash = (snap) => {
 
     ctx.fillStyle = SCORE_COLOR;
 
-    for (let i = 0; i < snap.humanPoints; i++) {
+    for (let i = 0; i < humanPoints; i++) {
       ctx.fillRect(100 + i * 30, 850, 20, 100);
     }
 
-    for (let i = 0; i < snap.computerPoints; i++) {
+    for (let i = 0; i < computerPoints; i++) {
       ctx.fillRect(1700 - i * 30, 850, 20, 100);
     }
   }
 
-  const phase = getPhase(snap.completionFactor, PHASE_LENGTHS);
+  const phase = getPhase(completionFactor, PHASE_LENGTHS);
   const phaseLength = PHASE_LENGTHS[phase];
-  const phaseTime = getPhaseTime(snap.completionFactor, PHASE_LENGTHS);
+  const phaseTime = getPhaseTime(completionFactor, PHASE_LENGTHS);
 
   switch (phase) {
     case 0: {
@@ -93,14 +102,14 @@ const moveClash = (snap) => {
       const [, y, r] = selectedHumanMoveCurrentCircle;
       const d = 2 * r;
 
-      ctx.fillStyle = getBackgroundColorOf(snap.humanMove);
+      ctx.fillStyle = getBackgroundColorOf(humanMove);
 
       ctx.beginPath();
       ctx.arc(x, y, r, 0, 2 * Math.PI);
       ctx.fill();
       ctx.closePath();
 
-      ctx.drawImage(images[noSpace(snap.humanMove)], x - r, y - r, d, d);
+      ctx.drawImage(images[noSpace(humanMove)], x - r, y - r, d, d);
 
       break;
     }
@@ -114,14 +123,14 @@ const moveClash = (snap) => {
         const [, y, r] = selectedHumanMoveEndCircle;
         const d = 2 * r;
 
-        ctx.fillStyle = getBackgroundColorOf(snap.humanMove);
+        ctx.fillStyle = getBackgroundColorOf(humanMove);
 
         ctx.beginPath();
         ctx.arc(x, y, r, 0, 2 * Math.PI);
         ctx.fill();
         ctx.closePath();
 
-        ctx.drawImage(images[noSpace(snap.humanMove)], x - r, y - r, d, d);
+        ctx.drawImage(images[noSpace(humanMove)], x - r, y - r, d, d);
       }
 
       // Draw computer move
@@ -133,14 +142,14 @@ const moveClash = (snap) => {
       const [, y, r] = selectedComputerMoveCurrentCircle;
       const d = 2 * r;
 
-      ctx.fillStyle = getBackgroundColorOf(snap.computerMove);
+      ctx.fillStyle = getBackgroundColorOf(computerMove);
 
       ctx.beginPath();
       ctx.arc(x, y, r, 0, 2 * Math.PI);
       ctx.fill();
       ctx.closePath();
 
-      ctx.drawImage(images[noSpace(snap.computerMove)], x - r, y - r, d, d);
+      ctx.drawImage(images[noSpace(computerMove)], x - r, y - r, d, d);
 
       break;
     }
@@ -150,7 +159,7 @@ const moveClash = (snap) => {
       const FADE_RATE = 5;
 
       {
-        if (snap.whoGetsThePoint === 'COMPUTER' || snap.whoGetsThePoint === 'BOTH') {
+        if (whoGetsThePoint === 'COMPUTER' || whoGetsThePoint === 'BOTH') {
           ctx.globalAlpha = lerp(1, 0, Math.min(phaseTime * FADE_RATE, 1));
         }
 
@@ -160,21 +169,21 @@ const moveClash = (snap) => {
         const [, y, r] = selectedHumanMoveEndCircle;
         const d = 2 * r;
 
-        ctx.fillStyle = getBackgroundColorOf(snap.humanMove);
+        ctx.fillStyle = getBackgroundColorOf(humanMove);
 
         ctx.beginPath();
         ctx.arc(x, y, r, 0, 2 * Math.PI);
         ctx.fill();
         ctx.closePath();
 
-        ctx.drawImage(images[noSpace(snap.humanMove)], x - r, y - r, d, d);
+        ctx.drawImage(images[noSpace(humanMove)], x - r, y - r, d, d);
 
         ctx.globalAlpha = 1;
       }
 
       // Draw computer move
       {
-        if (snap.whoGetsThePoint === 'HUMAN' || snap.whoGetsThePoint === 'BOTH') {
+        if (whoGetsThePoint === 'HUMAN' || whoGetsThePoint === 'BOTH') {
           ctx.globalAlpha = lerp(1, 0, Math.min(phaseTime * FADE_RATE, 1));
         }
 
@@ -184,14 +193,14 @@ const moveClash = (snap) => {
         const [, y, r] = selectedComputerMoveEndCircle;
         const d = 2 * r;
 
-        ctx.fillStyle = getBackgroundColorOf(snap.computerMove);
+        ctx.fillStyle = getBackgroundColorOf(computerMove);
 
         ctx.beginPath();
         ctx.arc(x, y, r, 0, 2 * Math.PI);
         ctx.fill();
         ctx.closePath();
 
-        ctx.drawImage(images[noSpace(snap.computerMove)], x - r, y - r, d, d);
+        ctx.drawImage(images[noSpace(computerMove)], x - r, y - r, d, d);
 
         ctx.globalAlpha = 1;
       }
@@ -200,39 +209,39 @@ const moveClash = (snap) => {
     }
 
     case 3: {
-      if (!(snap.whoGetsThePoint === 'COMPUTER' || snap.whoGetsThePoint === 'BOTH')) {
+      if (!(whoGetsThePoint === 'COMPUTER' || whoGetsThePoint === 'BOTH')) {
         const selectedHumanMoveEndCircle = [490, 500, 360];
 
         const x = selectedHumanMoveEndCircle[0] - 850 * (phaseTime / phaseLength);
         const [, y, r] = selectedHumanMoveEndCircle;
         const d = 2 * r;
 
-        ctx.fillStyle = getBackgroundColorOf(snap.humanMove);
+        ctx.fillStyle = getBackgroundColorOf(humanMove);
 
         ctx.beginPath();
         ctx.arc(x, y, r, 0, 2 * Math.PI);
         ctx.fill();
         ctx.closePath();
 
-        ctx.drawImage(images[noSpace(snap.humanMove)], x - r, y - r, d, d);
+        ctx.drawImage(images[noSpace(humanMove)], x - r, y - r, d, d);
       }
 
       // Draw computer move
-      if (!(snap.whoGetsThePoint === 'HUMAN' || snap.whoGetsThePoint === 'BOTH')) {
+      if (!(whoGetsThePoint === 'HUMAN' || whoGetsThePoint === 'BOTH')) {
         const selectedComputerMoveEndCircle = [1310, 500, 360];
 
         const x = selectedComputerMoveEndCircle[0] + 850 * (phaseTime / phaseLength);
         const [, y, r] = selectedComputerMoveEndCircle;
         const d = 2 * r;
 
-        ctx.fillStyle = getBackgroundColorOf(snap.computerMove);
+        ctx.fillStyle = getBackgroundColorOf(computerMove);
 
         ctx.beginPath();
         ctx.arc(x, y, r, 0, 2 * Math.PI);
         ctx.fill();
         ctx.closePath();
 
-        ctx.drawImage(images[noSpace(snap.computerMove)], x - r, y - r, d, d);
+        ctx.drawImage(images[noSpace(computerMove)], x - r, y - r, d, d);
       }
 
       break;

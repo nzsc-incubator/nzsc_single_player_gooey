@@ -5,16 +5,20 @@ import images from '../images';
 import getBackgroundColorOf from '../getBackgroundColorOf';
 import { nthRect } from '../rect';
 
-const characterToCharacter = (snap) => {
+const characterToCharacter = ({
+  previouslyAvailableCharacters,
+  availableCharacters,
+  completionFactor,
+}) => {
   ctx.fillStyle = BACKGROUND;
   ctx.fillRect(0, 0, 1800, 1000);
 
-  const previouslyAvailableCharacterLogoMoves = snap.previouslyAvailableCharacters.map(logoOfCharacter);
-  const availableCharacterLogoMoves = snap.availableCharacters.map(logoOfCharacter);
+  const previouslyAvailableCharacterLogoMoves = previouslyAvailableCharacters.map(logoOfCharacter);
+  const availableCharacterLogoMoves = availableCharacters.map(logoOfCharacter);
 
   for (let i = 0; i < previouslyAvailableCharacterLogoMoves.length; i++) {
     const rect = nthRect(i);
-    const x = rect[0] + 1800 * (0 - snap.completionFactor);
+    const x = rect[0] + 1800 * (0 - completionFactor);
     const [, y, w, h] = rect;
 
     ctx.fillStyle = getBackgroundColorOf(previouslyAvailableCharacterLogoMoves[i]);
@@ -25,7 +29,7 @@ const characterToCharacter = (snap) => {
 
   for (let i = 0; i < availableCharacterLogoMoves.length; i++) {
     const rect = nthRect(i);
-    const x = rect[0] + 1800 * (1 - snap.completionFactor);
+    const x = rect[0] + 1800 * (1 - completionFactor);
     const [, y, w, h] = rect;
     ctx.fillRect(x, y, w, h);
 
