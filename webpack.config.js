@@ -20,8 +20,9 @@ module.exports = {
   },
   plugins: [
     new SWPrecacheWebpackPlugin({
-      staticFileGlobs: ['./public/index.html', './public/index.css'],
+      staticFileGlobs: ['public/index.html', 'public/index.css'],
       mergeStaticsConfig: true,
+      stripPrefix: 'public/'
     }),
   ]
 };
