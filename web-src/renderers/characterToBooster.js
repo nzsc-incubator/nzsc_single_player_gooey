@@ -78,7 +78,7 @@ const characterToBooster = ({
       const [x, y, w, h] = selectedHumanMoveCurrentRect;
 
       const imageStartRect = [x, 300, 400, 400];
-      const imageEndRect = [200, 300, 600, 600]; //< TODO
+      const imageEndRect = [200, 200, 600, 600]; //< TODO
       const imageCurrentRect = imageStartRect.map((n, i) => lerp(n, imageEndRect[i], phaseTime / phaseLength));
       const [ix, iy, iw, ih] = imageCurrentRect;
 
@@ -96,7 +96,7 @@ const characterToBooster = ({
         const selectedHumanMoveEndRect = [200, 100, 600, 800];
         const [x, y, w, h] = selectedHumanMoveEndRect;
 
-        const imageEndRect = [200, 300, 600, 600]; //< TODO
+        const imageEndRect = [200, 200, 600, 600]; //< TODO
         const [ix, iy, iw, ih] = imageEndRect;
 
         ctx.fillStyle = getBackgroundColorOf(previouslyAvailableCharacterLogoMoves[humanCharacterIndex]);
@@ -111,8 +111,8 @@ const characterToBooster = ({
       const selectedComputerMoveCurrentRect = selectedComputerMoveStartRect.map((n, i) => lerp(n, selectedComputerMoveEndRect[i], phaseTime / phaseLength));
       const [x, y, w, h] = selectedComputerMoveCurrentRect;
 
-      const imageStartRect = [1800, 300, 600, 600]; //< TODO
-      const imageEndRect = [1000, 300, 600, 600]; //< TODO
+      const imageStartRect = [1800, 200, 600, 600]; //< TODO
+      const imageEndRect = [1000, 200, 600, 600]; //< TODO
       const imageCurrentRect = imageStartRect.map((n, i) => lerp(n, imageEndRect[i], phaseTime / phaseLength));
       const [ix, iy, iw, ih] = imageCurrentRect;
 
@@ -136,7 +136,7 @@ const characterToBooster = ({
         const selectedHumanMoveEndRect = [200, 100, 600, 800];
         const [x, y, w, h] = selectedHumanMoveEndRect;
 
-        const imageEndRect = [200, 300, 600, 600]; //< TODO
+        const imageEndRect = [200, 200, 600, 600]; //< TODO
         const [ix, iy, iw, ih] = imageEndRect;
 
         ctx.fillStyle = getBackgroundColorOf(previouslyAvailableCharacterLogoMoves[humanCharacterIndex]);
@@ -156,7 +156,7 @@ const characterToBooster = ({
         const selectedComputerMoveEndRect = [1000, 100, 600, 800];
         const [x, y, w, h] = selectedComputerMoveEndRect;
 
-        const imageEndRect = [1000, 300, 600, 600]; //< TODO
+        const imageEndRect = [1000, 200, 600, 600]; //< TODO
         const [ix, iy, iw, ih] = imageEndRect;
 
         ctx.fillStyle = getBackgroundColorOf(logoOfCharacter(computerCharacter));
@@ -178,17 +178,17 @@ const characterToBooster = ({
         ctx.fillStyle = getBackgroundColorOf(previouslyAvailableCharacterLogoMoves[humanCharacterIndex]);
         ctx.fillRect(x, 100, 600, 800);
 
-        ctx.drawImage(images[previouslyAvailableCharacterLogoMoves[humanCharacterIndex]], x, 300, 600, 600);
+        ctx.drawImage(images[previouslyAvailableCharacterLogoMoves[humanCharacterIndex]], x, 200, 600, 600);
       }
 
       // Computer move exits right
       if (whoGetsTheHeadstart !== 'HUMAN') {
         const x = 1000 + 800 * (phaseTime / phaseLength);
-        
+
         ctx.fillStyle = getBackgroundColorOf(logoOfCharacter(computerCharacter));
         ctx.fillRect(x, 100, 600, 800);
 
-        ctx.drawImage(images[logoOfCharacter(computerCharacter)], x, 300, 600, 600);
+        ctx.drawImage(images[logoOfCharacter(computerCharacter)], x, 200, 600, 600);
       }
 
       break;
