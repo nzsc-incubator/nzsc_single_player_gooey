@@ -56,15 +56,18 @@ const transitionFromNothingToCharacterScreen = () => {
 const transitionFromCharacterToCharacterScreen = () => {
   let last = Date.now();
   let t = 0;
-  const finishTime = 500;
+  const finishTime = 2000;
 
   const previouslyAvailableCharacters = JSON.parse(store.previousOutput.question()).availableCharacters;
   const availableCharacters = JSON.parse(store.currentOutput.question()).availableCharacters;
+  const { bothCharacter } = JSON.parse(store.currentOutput.notifications())
+    .find((notification) => notification.type === 'SAME_CHARACTER_SELECTION');
 
   store.repaint = () => {
     characterToCharacter({
       previouslyAvailableCharacters,
       availableCharacters,
+      bothCharacter,
       completionFactor: 1,
     });
   };
@@ -81,6 +84,7 @@ const transitionFromCharacterToCharacterScreen = () => {
     characterToCharacter({
       previouslyAvailableCharacters,
       availableCharacters,
+      bothCharacter,
       completionFactor: t / finishTime,
     });
 
