@@ -108,6 +108,8 @@ const transitionFromCharacterToBoosterScreen = () => {
   const characterSelectionAndHeadstartNotification = JSON.parse(store.currentOutput.notifications())
     .find((notification) => notification.type === 'CHARACTER_SELECTION_AND_HEADSTART');
   const { humanCharacter, computerCharacter, whoGetsTheHeadstart } = characterSelectionAndHeadstartNotification;
+  // We'll need this later to show the initial score, at the end of boosterToMove.
+  store.cachedHeadstart = whoGetsTheHeadstart;
 
   store.repaint = () => {
     characterToBooster({
@@ -151,15 +153,26 @@ const transitionFromCharacterToBoosterScreen = () => {
 const transitionFromBoosterToMoveScreen = () => {
   let last = Date.now();
   let t = 0;
-  const finishTime = 500;
+  const finishTime = 2000;
 
   const previouslyAvailableBoosters = JSON.parse(store.previousOutput.question()).availableBoosters;
   const availableMoves = JSON.parse(store.currentOutput.question()).availableMoves;
+  const { humanBooster, computerBooster } = JSON.parse(store.currentOutput.notifications())
+    .find((notification) => notification.type === 'BOOSTER_SELECTION');
+  const [humanPoints, computerPoints] = store.cachedHeadstart === 'HUMAN'
+    ? [1, 0]
+    : store.cachedHeadstart === 'COMPUTER'
+      ? [0, 1]
+      : [0, 0];
 
   store.repaint = () => {
     boosterToMove({
       previouslyAvailableBoosters,
       availableMoves,
+      humanBooster,
+      computerBooster,
+      humanPoints,
+      computerPoints,
       completionFactor: 1,
     });
   };
@@ -176,6 +189,10 @@ const transitionFromBoosterToMoveScreen = () => {
     boosterToMove({
       previouslyAvailableBoosters,
       availableMoves,
+      humanBooster,
+      computerBooster,
+      humanPoints,
+      computerPoints,
       completionFactor: t / finishTime,
     });
 
